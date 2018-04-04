@@ -9,14 +9,9 @@ import java.net.Socket;
 
 public class Client {
 	private Socket socket;
-
+	private int port;
 	public Client(int port) {
-		try {
-			this.socket = new Socket(InetAddress.getLocalHost(), port);
-			this.demande("Nouveau utilisateur");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.port = port;
 	}
 
 	public Socket getSocket() {
@@ -27,7 +22,12 @@ public class Client {
 		this.socket = socket;
 	}
 
-	public void demande(String requete) {
+	public void demande(String requete, boolean ecoute) {
+		try {
+			this.socket = new Socket(InetAddress.getLocalHost(), port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		PrintWriter out;
 		try {
 			out = new PrintWriter(this.getSocket().getOutputStream(), true);
@@ -35,10 +35,18 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (!requete.equals("Nouveau utilisateur")) {
+		if (ecoute) {
 			ecoute();
 		}
-
+		
+		try {
+			out = new PrintWriter(this.getSocket().getOutputStream(), true);
+			out.println("fin");
+		} catch (IOException e) {
+			e.getMessage();
+		}
+		
+		
 	}
 
 	public void ecoute() {

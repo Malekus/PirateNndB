@@ -42,7 +42,7 @@ public class Serveur {
 
 		} catch (IOException e) {
 			//pool.shutdown();
-			e.printStackTrace();
+			e.getMessage();
 		}
 
 	}

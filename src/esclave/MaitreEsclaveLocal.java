@@ -16,7 +16,6 @@ public class MaitreEsclaveLocal implements Runnable {
 	public MaitreEsclaveLocal(Socket client, Serveur serveur) {
 		this.client = client;
 		this.serveur = serveur;
-		// envoie("Vous etes connecté");
 	}
 
 	public void run() {
@@ -24,18 +23,19 @@ public class MaitreEsclaveLocal implements Runnable {
 		System.out.println("Connexion en Local");
 		while (!this.getClient().isClosed()) {
 			try {
-				System.out.println(Thread.currentThread());
 				BufferedReader lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
 				String commande[] = lecture.readLine().split(" ");
 				PrintWriter ecriture = new PrintWriter(client.getOutputStream(), true);
-				System.out.println(commande[0]);
+				System.out.println(lecture.readLine());
 				switch (commande[0]) {
 				case "fin": {
 					fin = true;
 				}
 					break;
 
-				default:
+				default:{
+					System.out.println("Defaut");
+				}
 					break;
 				}
 				if (fin) {
@@ -43,7 +43,6 @@ public class MaitreEsclaveLocal implements Runnable {
 					lecture = null;
 					ecriture = null;
 					client.close();
-					break;
 				}
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
