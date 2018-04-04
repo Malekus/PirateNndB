@@ -1,4 +1,5 @@
 package client;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +13,7 @@ public class Client {
 	public Client(int port) {
 		try {
 			this.socket = new Socket(InetAddress.getLocalHost(), port);
+			this.demande("Nouveau utilisateur");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -28,22 +30,24 @@ public class Client {
 	public void demande(String requete) {
 		PrintWriter out;
 		try {
-			out = new PrintWriter(getSocket().getOutputStream(), true);
+			out = new PrintWriter(this.getSocket().getOutputStream(), true);
 			out.println(requete);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		ecoute();
+		if (!requete.equals("Nouveau utilisateur")) {
+			ecoute();
+		}
+
 	}
-	
+
 	public void ecoute() {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-			System.out.println("Client : "+in.readLine());
+			System.out.println("Client : " + in.readLine());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 }
