@@ -3,7 +3,7 @@ package modele;
 public enum Equipement {
 	laveLigne("Lave-ligne"),
 	wifi("Wi-Fi"),
-	television("TÃ©lÃ©vision"),
+	television("Télévision"),ferArepasser("Fer à repasser"),chauffage("Chauffage"), eauChaude("Eau chaude"),
 	climatisation("Climatisation");
 	
 	private String name = "";
