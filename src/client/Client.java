@@ -10,8 +10,19 @@ import java.net.Socket;
 public class Client {
 	private Socket socket;
 	private int port;
+
 	public Client(int port) {
 		this.port = port;
+		try {
+			this.socket = new Socket(InetAddress.getLocalHost(), port);
+			Thread thDemande = new Thread(new Demande(new PrintWriter(getSocket().getOutputStream(), true)));
+			Thread thEcoute = new Thread(
+					new Ecoute(new BufferedReader(new InputStreamReader(getSocket().getInputStream()))));
+			thDemande.start();
+			thEcoute.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Socket getSocket() {
@@ -23,11 +34,6 @@ public class Client {
 	}
 
 	public void demande(String requete, boolean ecoute) {
-		try {
-			this.socket = new Socket(InetAddress.getLocalHost(), port);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		PrintWriter out;
 		try {
 			out = new PrintWriter(this.getSocket().getOutputStream(), true);
@@ -35,24 +41,13 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (ecoute) {
-			ecoute();
-		}
-		
-		try {
-			out = new PrintWriter(this.getSocket().getOutputStream(), true);
-			out.println("fin");
-		} catch (IOException e) {
-			e.getMessage();
-		}
-		
-		
+		// ecoute();
 	}
 
 	public void ecoute() {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-			System.out.println("Client : " + in.readLine());
+			System.out.println(in.readLine());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

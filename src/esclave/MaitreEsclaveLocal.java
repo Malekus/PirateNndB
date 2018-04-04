@@ -11,6 +11,8 @@ import serveur.Serveur;
 public class MaitreEsclaveLocal implements Runnable {
 	private final Socket client;
 	private final Serveur serveur;
+	private BufferedReader lecture = null;
+	private PrintWriter ecriture = null;
 	private boolean enCours = true;
 
 	public MaitreEsclaveLocal(Socket client, Serveur serveur) {
@@ -19,35 +21,17 @@ public class MaitreEsclaveLocal implements Runnable {
 	}
 
 	public void run() {
-		boolean fin = false;
 		System.out.println("Connexion en Local");
-		while (!this.getClient().isClosed()) {
+		while (!client.isClosed()) {
 			try {
-				BufferedReader lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-				String commande[] = lecture.readLine().split(" ");
-				PrintWriter ecriture = new PrintWriter(client.getOutputStream(), true);
+				lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
 				System.out.println(lecture.readLine());
-				switch (commande[0]) {
-				case "fin": {
-					fin = true;
-				}
-					break;
-
-				default:{
-					System.out.println("Defaut");
-				}
-					break;
-				}
-				if (fin) {
-					ecriture.println("Vous vous etes déconnecté");
-					lecture = null;
-					ecriture = null;
-					client.close();
-				}
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+
 	}
 
 	public Socket getClient() {
@@ -58,13 +42,4 @@ public class MaitreEsclaveLocal implements Runnable {
 		return serveur;
 	}
 
-	public void envoie(String texte) {
-		try {
-			PrintWriter ecriture = new PrintWriter(getClient().getOutputStream(), true);
-			ecriture.println(texte);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
