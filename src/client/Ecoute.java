@@ -15,8 +15,7 @@ public class Ecoute implements Runnable {
 		try {
 			lecture = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -25,7 +24,7 @@ public class Ecoute implements Runnable {
 			try {
 				System.out.println("Vous avez recu : " + this.lecture.readLine());
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 	}
