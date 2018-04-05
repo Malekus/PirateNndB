@@ -30,16 +30,11 @@ public class Serveur {
 			try {
 				this.setSocket(this.getServeur().accept());
 				System.out.println("Une personne s'est connecté");
-				/*BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
-				String requete[] = lecture.readLine().split(" ");
-				System.out.println(lecture.readLine());*/
-				/*if (requete[0].equals("GET") && requete[2].equals("HTTP/1.1")) {
-					pool.execute(new MaitreEsclaveNavigateur(this.getSocket(), this));
-				} else {*/
-				pool.execute(new MaitreEsclaveLocal(this.getSocket(), this));
-				//}
+				pool.execute(new MaitreEsclaveLocal(getSocket(), this));
+				
 			} catch (IOException e) {
-				System.out.println(e.getMessage());;
+				System.out.println(e.getMessage());
+				;
 			}
 		}
 
