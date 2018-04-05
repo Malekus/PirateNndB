@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listeLogement>
+    <logements>
+        <disponibilite>
+            <disponible>true</disponible>
+        </disponibilite>
+        <hote>
+            <dateInscription>2018-04-05T18:38:26.885+01:00</dateInscription>
+            <description>Je parle pour rien</description>
+            <nbCommentaire>6</nbCommentaire>
+            <pseudo>Hannae</pseudo>
+        </hote>
+        <lieu>
+            <adresse>8 rue toto</adresse>
+            <pays>France</pays>
+            <region>Ile-de-france</region>
+            <ville>Paris</ville>
+        </lieu>
+        <prix>546.0</prix>
+    </logements>
+</listeLogement>

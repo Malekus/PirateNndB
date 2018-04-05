@@ -66,7 +66,13 @@ public class Logement {
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Logement [hote=" + hote + ", equipements=" + equipements + ", lieu=" + lieu + ", commentaires="
+				+ commentaires + ", disponibilite=" + disponibilite + ", prix=" + prix + "]";
+	}
+
 	public void set(String attr, Object obj) {
 		switch (attr) {
 		case "hote":
@@ -76,16 +82,16 @@ public class Logement {
 			this.setLieu((Emplacement) obj);
 			break;
 		case "equipement":
-			this.getEquipements().add((Equipement)obj);
+			this.getEquipements().add((Equipement) obj);
 			break;
 		case "prix":
-			this.setPrix((float)obj);
+			this.setPrix((float) obj);
 			break;
 		case "disponible":
 			this.setDisponibilite((Disponibilite) obj);
 			break;
 		case "commentaire":
-			this.getCommentaires().add((Commentaire)obj);
+			this.getCommentaires().add((Commentaire) obj);
 			break;
 		default:
 			break;

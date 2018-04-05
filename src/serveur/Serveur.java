@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import esclave.MaitreEsclaveLocal;
+import modele.Gestionnaire;
 import rmi.LogementImpl;
 
 public class Serveur {
@@ -28,6 +29,7 @@ public class Serveur {
 	}
 
 	public void lancement() {
+		Gestionnaire.initialisation();
 		System.out.println("Serveur lanc�");
 		while (allume) {
 			try {
