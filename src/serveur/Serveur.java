@@ -38,6 +38,15 @@ public class Serveur {
 				} else {*/
 				pool.execute(new MaitreEsclaveLocal(this.getSocket(), this));
 				//}
+				
+				
+				//PARTIE RMI
+				LocateRegistry.createRegistry(2018);
+				BanqueServiceImpl od = new BanqueServiceImpl();
+				System.out.println(od.toString());
+				Naming.rebind("rmi://localhost:2018/BK", od);
+				
+				
 			} catch (IOException e) {
 				System.out.println(e.getMessage());;
 			}

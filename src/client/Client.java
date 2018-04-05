@@ -21,6 +21,13 @@ public class Client {
 			thDemande.setPriority(Thread.MAX_PRIORITY);
 			thDemande.start();
 			thEcoute.start();
+			
+			// PARTIE RMI
+			
+			/*
+			ILogementRemote stub =(ILogementRemote)Naming.lookup("rmi://localhost:2018/BK");
+			System.out.println(stub.fonctionqu'onadefinit));
+			*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
