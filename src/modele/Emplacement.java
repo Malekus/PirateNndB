@@ -13,6 +13,9 @@ public class Emplacement {
 		this.pays = pays;
 	}
 
+	public Emplacement() {
+	}
+	
 	public String getAdresse() {
 		return adresse;
 	}

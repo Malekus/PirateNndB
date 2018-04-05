@@ -24,8 +24,13 @@ public class ListePersonne {
 	public void setPersonnes(ArrayList<Personne> personnes) {
 		this.personnes = personnes;
 	}
+
+	@Override
+	public String toString() {
+		return "ListePersonne [" + personnes + "]";
+	}
 	
-	 
+	
 	
 	
 }

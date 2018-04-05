@@ -3,6 +3,9 @@ package modele;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Personne {
 	private String pseudo;
 	private String description;
@@ -10,6 +13,9 @@ public class Personne {
 	private Date dateInscription;
 	private ArrayList<Langue> langues;
 
+	public Personne() {
+	}
+	
 	public Personne(String pseudo, String description, int nbCommentaire, Date dateInscription) {
 		this.pseudo = pseudo;
 		this.description = description;

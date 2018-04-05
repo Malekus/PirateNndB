@@ -5,12 +5,12 @@ import java.util.Date;
 public class Commentaire {
 	private Personne personne;
 	private Date dateCommentaire;
-	private String commentaire;
+	private String texte;
 
 	public Commentaire(Personne personne, Date dateCommentaire, String commentaire) {
 		this.personne = personne;
 		this.dateCommentaire = dateCommentaire;
-		this.commentaire = commentaire;
+		this.texte = commentaire;
 	}
 
 	public Personne getPersonne() {
@@ -29,12 +29,12 @@ public class Commentaire {
 		this.dateCommentaire = dateCommentaire;
 	}
 
-	public String getCommentaire() {
-		return commentaire;
+	public String getTexte() {
+		return texte;
 	}
 
-	public void setCommentaire(String commentaire) {
-		this.commentaire = commentaire;
+	public void setTexte(String texte) {
+		this.texte = texte;
 	}
 
 	public void set(String attr, Object obj) {
@@ -45,8 +45,8 @@ public class Commentaire {
 		case "dateCommentaire":
 			this.setDateCommentaire((Date) obj);
 			break;
-		case "commentaire":
-			this.setCommentaire((String) obj);
+		case "texte":
+			this.setTexte((String) obj);
 			break;
 
 		default:
