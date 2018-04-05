@@ -34,7 +34,7 @@ public class MaitreEsclaveLocal implements Runnable {
 				String commande[] = lecture.readLine().split(" ");
 				switch (commande[0].toUpperCase()) {
 				case "CREER_PERSONNE": {
-					Personne personne = new Personne(commande[1], commande[2], 0, new Date(), new ArrayList<Langue>());
+					Personne personne = new Personne(commande[1], commande[2], 0, new Date());
 					Gestionnaire.ToutesLesPersonnes.add(personne);
 					ecriture.println("Vous avez creer une personne");
 				}
@@ -50,8 +50,9 @@ public class MaitreEsclaveLocal implements Runnable {
 						ecriture.println(personne);
 					}
 
-				}break;
-				
+				}
+					break;
+
 				case "MODIFIER_PERSONNE": {
 					Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
 							.filter(p -> p.getPseudo().equals(commande[1])).findAny().orElse(null);
@@ -60,7 +61,19 @@ public class MaitreEsclaveLocal implements Runnable {
 					personne.set(commande[2], commande[3]);
 					ecriture.println(personne);
 
-				}break;
+				}
+					break;
+
+				case "LOGEMENT": {
+					Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
+							.filter(p -> p.getPseudo().equals(commande[1])).findAny().orElse(null);
+					;
+					ecriture.println(personne);
+					personne.set(commande[2], commande[3]);
+					ecriture.println(personne);
+
+				}
+					break;
 
 				default:
 					break;

@@ -10,13 +10,12 @@ public class Personne {
 	private Date dateInscription;
 	private ArrayList<Langue> langues;
 
-	public Personne(String pseudo, String description, int nbCommentaire, Date dateInscription,
-			ArrayList<Langue> langues) {
+	public Personne(String pseudo, String description, int nbCommentaire, Date dateInscription) {
 		this.pseudo = pseudo;
 		this.description = description;
 		this.nbCommentaire = nbCommentaire;
 		this.dateInscription = dateInscription;
-		this.langues = langues;
+		this.langues = new ArrayList<Langue>();
 	}
 
 	public String getPseudo() {
