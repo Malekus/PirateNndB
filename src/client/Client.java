@@ -23,9 +23,9 @@ public class Client {
 			thEcoute.start();
 			
 			// PARTIE RMI
-			
+			/*
 			ILogementRemote stub =(ILogementRemote)Naming.lookup("rmi://localhost:2018/BK");
-			System.out.println(stub.addition(2,4)));
+			System.out.println(stub.addition(2,4)));*/
 
 		} catch (IOException e) {
 			e.printStackTrace();
