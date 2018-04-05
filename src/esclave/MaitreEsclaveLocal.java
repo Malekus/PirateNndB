@@ -51,6 +51,16 @@ public class MaitreEsclaveLocal implements Runnable {
 					}
 
 				}break;
+				
+				case "MODIFIER_PERSONNE": {
+					Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
+							.filter(p -> p.getPseudo().equals(commande[1])).findAny().orElse(null);
+					;
+					ecriture.println(personne);
+					personne.set(commande[2], commande[3]);
+					ecriture.println(personne);
+
+				}break;
 
 				default:
 					break;

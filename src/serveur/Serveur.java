@@ -3,6 +3,8 @@ package serveur;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,12 +27,11 @@ public class Serveur {
 	}
 
 	public void lancement() {
-		System.out.println("Serveur lancé");
+		System.out.println("Serveur lancï¿½");
 		while (allume) {
 			try {
 				this.setSocket(this.getServeur().accept());
-				System.out.println("Une personne s'est connecté");
-<<<<<<< HEAD
+				System.out.println("Une personne s'est connectï¿½");
 				/*BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
 				String requete[] = lecture.readLine().split(" ");
 				System.out.println(lecture.readLine());*/
@@ -42,14 +43,11 @@ public class Serveur {
 				
 				
 				//PARTIE RMI
-				LocateRegistry.createRegistry(2018);
+				/*LocateRegistry.createRegistry(2018);
 				BanqueServiceImpl od = new BanqueServiceImpl();
 				System.out.println(od.toString());
-				Naming.rebind("rmi://localhost:2018/BK", od);
+				Naming.rebind("rmi://localhost:2018/BK", od);*/
 				
-=======
-				pool.execute(new MaitreEsclaveLocal(getSocket(), this));
->>>>>>> 71783721cbaf7787e93166fbc4949d4d9feaf919
 				
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
