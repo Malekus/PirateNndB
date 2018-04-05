@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import esclave.MaitreEsclaveLocal;
+import rmi.LogementImpl;
 
 public class Serveur {
 	private ServerSocket serveur;
@@ -44,7 +45,7 @@ public class Serveur {
 				
 				//PARTIE RMI
 				/*LocateRegistry.createRegistry(2018);
-				BanqueServiceImpl od = new BanqueServiceImpl();
+				LogementImpl od = new LogementImpl();
 				System.out.println(od.toString());
 				Naming.rebind("rmi://localhost:2018/BK", od);*/
 				

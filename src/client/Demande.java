@@ -26,7 +26,7 @@ public class Demande implements Runnable {
 		while (!socket.isClosed()) {
 			requete = sc.nextLine();
 			this.ecriture.println(requete);
-			if(requete.equals("FIN")) {
+			if (requete.equals("FIN")) {
 				try {
 					socket.close();
 				} catch (IOException e) {
