@@ -1,8 +1,8 @@
-import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.Date;
 
-public interface ILogementRemote extends Remote{
-
-	//déclaration des méthodes
+public class LogementImpl extends UnicastRemoteObject implements ILogementRemote{
+	@Override
+	public int addition(int x,int y) throws RemoteException {
+		return x+y;
+	}
 }

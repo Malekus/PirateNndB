@@ -43,10 +43,10 @@ public class Serveur {
 				
 				
 				//PARTIE RMI
-				/*LocateRegistry.createRegistry(2018);
-				BanqueServiceImpl od = new BanqueServiceImpl();
+				LocateRegistry.createRegistry(2018);
+				LogementImpl od = new LogementImpl();
 				System.out.println(od.toString());
-				Naming.rebind("rmi://localhost:2018/BK", od);*/
+				Naming.rebind("rmi://localhost:2018/BK", od);
 				
 				
 			} catch (IOException e) {
