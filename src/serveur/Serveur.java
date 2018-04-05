@@ -30,6 +30,7 @@ public class Serveur {
 			try {
 				this.setSocket(this.getServeur().accept());
 				System.out.println("Une personne s'est connecté");
+<<<<<<< HEAD
 				/*BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
 				String requete[] = lecture.readLine().split(" ");
 				System.out.println(lecture.readLine());*/
@@ -46,9 +47,13 @@ public class Serveur {
 				System.out.println(od.toString());
 				Naming.rebind("rmi://localhost:2018/BK", od);
 				
+=======
+				pool.execute(new MaitreEsclaveLocal(getSocket(), this));
+>>>>>>> 71783721cbaf7787e93166fbc4949d4d9feaf919
 				
 			} catch (IOException e) {
-				System.out.println(e.getMessage());;
+				System.out.println(e.getMessage());
+				;
 			}
 		}
 
