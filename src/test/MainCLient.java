@@ -11,6 +11,5 @@ public class MainCLient implements Runnable{
 	
 	public static void main(String[] args) {
 		Client c = new Client("localhost", 1234);
-		//c.demande("toto", true);
 	}
 }

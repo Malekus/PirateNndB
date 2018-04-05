@@ -33,49 +33,26 @@ public class MaitreEsclaveLocal implements Runnable {
 				ecriture = new PrintWriter(getClient().getOutputStream(), true);
 				String commande[] = lecture.readLine().split(" ");
 				switch (commande[0].toUpperCase()) {
-				case "CREER_PERSONNE": {
-					Personne personne = new Personne(commande[1], commande[2], 0, new Date());
-					Gestionnaire.ToutesLesPersonnes.add(personne);
-					ecriture.println("Vous avez creer une personne");
+
+				case "PERSONNE": {
+					new EsclavePersonne(commande, ecriture);
 				}
 					break;
-
-				case "AFFICHER_PERSONNE": {
-					if (commande.length == 1) {
-						ecriture.println(Gestionnaire.ToutesLesPersonnes);
-					} else {
-						Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
-								.filter(p -> p.getPseudo().equals(commande[1])).findAny().orElse(null);
-						;
-						ecriture.println(personne);
-					}
-
-				}
-					break;
-
-				case "MODIFIER_PERSONNE": {
-					Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
-							.filter(p -> p.getPseudo().equals(commande[1])).findAny().orElse(null);
-					;
-					ecriture.println(personne);
-					personne.set(commande[2], commande[3]);
-					ecriture.println(personne);
-
-				}
-					break;
-
 				case "LOGEMENT": {
-					Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
-							.filter(p -> p.getPseudo().equals(commande[1])).findAny().orElse(null);
-					;
-					ecriture.println(personne);
-					personne.set(commande[2], commande[3]);
-					ecriture.println(personne);
-
+					new EsclaveLogement(commande, ecriture);
+				}
+					break;
+				case "COMMENTAIRE": {
+					new EsclaveCommentaire(commande, ecriture);
+				}
+					break;
+				case "EMPLACEMENT": {
+					new EsclaveEmplacement(commande, ecriture);
 				}
 					break;
 
 				default:
+					ecriture.println("Aucun commande associée");
 					break;
 				}
 
@@ -84,8 +61,7 @@ public class MaitreEsclaveLocal implements Runnable {
 					getClient().close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 
