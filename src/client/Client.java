@@ -11,13 +11,14 @@ public class Client {
 	private Socket socket;
 	private int port;
 
-	public Client(int port) {
+	public Client(String adresse, int port) {
 		this.port = port;
 		try {
-			this.socket = new Socket(InetAddress.getLocalHost(), port);
-			Thread thDemande = new Thread(new Demande(new PrintWriter(getSocket().getOutputStream(), true)));
+			this.socket = new Socket(adresse, port);
+			Thread thDemande = new Thread(new Demande(this.socket));
 			Thread thEcoute = new Thread(
-					new Ecoute(new BufferedReader(new InputStreamReader(getSocket().getInputStream()))));
+					new Ecoute(this.socket));
+			thDemande.setPriority(Thread.MAX_PRIORITY);
 			thDemande.start();
 			thEcoute.start();
 		} catch (IOException e) {

@@ -25,7 +25,16 @@ public class MaitreEsclaveLocal implements Runnable {
 		while (!client.isClosed()) {
 			try {
 				lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-				System.out.println(lecture.readLine());
+				ecriture = new PrintWriter(getClient().getOutputStream(), true);
+				String commande[] = lecture.readLine().split(" ");
+				for(String e : commande) {
+					System.out.println(e);
+				}
+				
+				if(commande[0].equals("FIN")) {
+					ecriture.println("Vous vous etes déconnecté");
+					getClient().close();
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

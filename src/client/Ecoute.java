@@ -7,14 +7,21 @@ import java.net.Socket;
 
 public class Ecoute implements Runnable {
 
+	Socket socket;
 	BufferedReader lecture = null;
 
-	public Ecoute(BufferedReader in) {
-		this.lecture = in;
+	public Ecoute(Socket socket) {
+		this.socket = socket;
+		try {
+			lecture = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void run() {
-		while (true) {
+		while (!socket.isClosed()) {
 			try {
 				System.out.println("Vous avez recu : " + this.lecture.readLine());
 			} catch (IOException e) {

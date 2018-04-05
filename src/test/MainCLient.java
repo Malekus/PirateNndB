@@ -6,12 +6,11 @@ public class MainCLient implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		Client c = new Client("localhost", 1234);
 	}
 	
 	public static void main(String[] args) {
-		Client c = new Client(1234);
+		Client c = new Client("localhost", 1234);
 		//c.demande("toto", true);
 	}
 }
