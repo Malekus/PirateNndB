@@ -97,15 +97,15 @@ public class Personne {
 	public Object getters(String attr) {
 		Method method;
 		try {
-			method = this.getClass().getMethod("get" + attr, null);
+			method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
 			Object objet = method.invoke(this, null);
 			return objet;
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		return new Object();
 	}
@@ -113,20 +113,21 @@ public class Personne {
 	public void setters(String attr, Object param) {
 		Method method;
 		try {
-			method = this.getClass().getMethod("set" + attr, param.getClass());
+			method = this.getClass().getMethod("set" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
+					param.getClass());
 			Object objet = method.invoke(this, param);
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 	}
 
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException {
 		Gestionnaire.initialisation();
-		System.out.println(Gestionnaire.ToutesLesPersonnes.get(1).getters("Pseudo"));
+		System.out.println(Gestionnaire.ToutesLesPersonnes.get(1).getters("eudo"));
 		Gestionnaire.ToutesLesPersonnes.get(1).setters("Pseudo", "hannnaee");
 		System.out.println(Gestionnaire.ToutesLesPersonnes.get(1).getters("Pseudo"));
 	}

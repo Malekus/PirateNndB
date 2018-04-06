@@ -1,41 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <listePersonne>
     <personnes>
-<<<<<<< HEAD
-        <dateInscription>2018-04-06T22:24:40.923+01:00</dateInscription>
-=======
-        <dateInscription>2018-04-06T10:07:13.208+02:00</dateInscription>
->>>>>>> 154e5f78fd0a28a39e4387ac7f7b07fb8bd38bda
-        <description>Commentaire 3</description>
+        <dateInscription>2018-04-06T23:17:19.071+02:00</dateInscription>
+        <description>Je parle pour rien</description>
         <nbCommentaire>6</nbCommentaire>
         <pseudo>Kader</pseudo>
     </personnes>
     <personnes>
-<<<<<<< HEAD
-        <dateInscription>2018-04-06T22:24:40.923+01:00</dateInscription>
-=======
-        <dateInscription>2018-04-06T10:07:13.208+02:00</dateInscription>
->>>>>>> 154e5f78fd0a28a39e4387ac7f7b07fb8bd38bda
+        <dateInscription>2018-04-06T23:17:19.071+02:00</dateInscription>
         <description>FiaseNA</description>
         <nbCommentaire>6</nbCommentaire>
         <pseudo>Nafise</pseudo>
     </personnes>
     <personnes>
-<<<<<<< HEAD
-        <dateInscription>2018-04-06T22:24:40.923+01:00</dateInscription>
-=======
-        <dateInscription>2018-04-06T10:07:13.208+02:00</dateInscription>
->>>>>>> 154e5f78fd0a28a39e4387ac7f7b07fb8bd38bda
+        <dateInscription>2018-04-06T23:17:19.071+02:00</dateInscription>
         <description>Je parle pour rien</description>
         <nbCommentaire>6</nbCommentaire>
         <pseudo>Hannae</pseudo>
     </personnes>
     <personnes>
-<<<<<<< HEAD
-        <dateInscription>2018-04-06T22:24:40.923+01:00</dateInscription>
-=======
-        <dateInscription>2018-04-06T10:07:13.208+02:00</dateInscription>
->>>>>>> 154e5f78fd0a28a39e4387ac7f7b07fb8bd38bda
+        <dateInscription>2018-04-06T23:17:19.071+02:00</dateInscription>
         <description>ptotodz dz dazd</description>
         <nbCommentaire>6</nbCommentaire>
         <pseudo>Pseudo54</pseudo>

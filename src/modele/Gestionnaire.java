@@ -11,7 +11,7 @@ public class Gestionnaire {
 
 	
 	public static void initialisation() {
-		Gestionnaire.ToutesLesPersonnes.add(new Personne("Kader", "Commentaire 3", 6, new Date()));
+		Gestionnaire.ToutesLesPersonnes.add(new Personne("Kader", "Je parle pour rien", 6, new Date()));
 		Gestionnaire.ToutesLesPersonnes.add(new Personne("Nafise", "FiaseNA", 6, new Date()));
 		Gestionnaire.ToutesLesPersonnes.add(new Personne("Hannae", "Je parle pour rien", 6, new Date()));
 		Gestionnaire.ToutesLesPersonnes.add(new Personne("Pseudo54", "ptotodz dz dazd", 6, new Date()));

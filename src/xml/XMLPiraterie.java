@@ -1,6 +1,7 @@
 package xml;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,10 @@ public class XMLPiraterie {
 		Gestionnaire.initialisation();		
 		ecriture(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne");
 		System.out.println(lecture(new ListePersonne(), "personne"));
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("pseudo", "Kader");
+		ArrayList<String> params = new ArrayList<String>();
+		params.add("description-Je parle pour rien");
+		params.add("pseudo-Kader");
+		System.out.println("Résutat recherche !!");
 		rechercher(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne", params);
 	}
 
@@ -59,7 +62,7 @@ public class XMLPiraterie {
 
 	}
 
-	public static void rechercher(Object obj, String filename, HashMap<String, Object> params) {
+	public static void rechercher(Object obj, String filename, ArrayList<String> params) {
 		String recherche = "";
 		if(filename.equals("personne")) {
 			ListePersonne lp = (ListePersonne) obj;

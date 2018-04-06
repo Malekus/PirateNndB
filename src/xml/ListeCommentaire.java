@@ -15,9 +15,5 @@ public class ListeCommentaire {
 	public ListeCommentaire(ArrayList<Commentaire> commentaires) {
 		this.lesCommentaires = commentaires;
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> 154e5f78fd0a28a39e4387ac7f7b07fb8bd38bda
 
 }
