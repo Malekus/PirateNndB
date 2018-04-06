@@ -11,21 +11,29 @@ import serveur.Serveur;
 public class MaitreEsclaveNavigateur implements Runnable {
 	private final Socket client;
 	private final Serveur serveur;
+	private BufferedReader lecture = null;
+	private PrintWriter ecriture = null;
+	private String first[];
 	private boolean enCours = true;
 
-	public MaitreEsclaveNavigateur(Socket client, Serveur serveur) {
+	public MaitreEsclaveNavigateur(Socket client, Serveur serveur, String first[]) {
 		this.client = client;
 		this.serveur = serveur;
+		this.first = first;
 	}
 
 	@Override
 	public void run() {
 		System.out.println("Connexion en Navigateur");
-		while (enCours) {
+		while (!client.isClosed()) {
 			try {
-				BufferedReader lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-				String commande[] = lecture.readLine().split(" ");
-				PrintWriter ecriture = new PrintWriter(client.getOutputStream(), true);
+				lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
+				ecriture = new PrintWriter(getClient().getOutputStream(), true);
+				if(this.first.length != 0) {
+					this.first = null;
+					ecriture.println("<html>Salut</html>");
+				}
+				
 
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
