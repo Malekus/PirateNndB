@@ -30,11 +30,11 @@ public class Serveur {
 
 	public void lancement() {
 		Gestionnaire.initialisation();
-		System.out.println("Serveur lancÃ©");
+		System.out.println("Serveur lancé");
 		while (allume) {
 			try {
 				this.setSocket(this.getServeur().accept());
-				System.out.println("Une personne s'est connectÃ©");
+				System.out.println("Une personne s'est connecté");
 				BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
 				String requete[] = lecture.readLine().split(" ");
 				if(requete[0].equals("GET")) {

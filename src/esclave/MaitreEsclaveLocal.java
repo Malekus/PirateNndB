@@ -37,11 +37,9 @@ public class MaitreEsclaveLocal implements Runnable {
 					this.first = null;
 				}else {
 					lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-					ecriture = new PrintWriter(getClient().getOutputStream(), true);
 					commande = lecture.readLine().split(" ");
 				}
-				
-				System.out.println(commande[0]);
+				ecriture = new PrintWriter(getClient().getOutputStream(), true);
 				
 				switch (commande[0].toUpperCase()) {
 

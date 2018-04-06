@@ -14,31 +14,31 @@ import modele.Personne;
 
 @XmlRootElement
 public class ListePersonne {
-	private ArrayList<Personne> personnes;
+	private ArrayList<Personne> personne;
 
 	public ListePersonne() {
-		this.personnes = new ArrayList<Personne>();
+		this.personne = new ArrayList<Personne>();
 	}
 
-	public ListePersonne(ArrayList<Personne> personnes) {
-		this.personnes = personnes;
+	public ListePersonne(ArrayList<Personne> personne) {
+		this.personne = personne;
 	}
 
 	public ArrayList<Personne> getPersonnes() {
-		return personnes;
+		return personne;
 	}
 
-	public void setPersonnes(ArrayList<Personne> personnes) {
-		this.personnes = personnes;
+	public void setPersonnes(ArrayList<Personne> personne) {
+		this.personne = personne;
 	}
 
 	@Override
 	public String toString() {
 		String r = "<ListePersonne>\n";
 		for (Personne p : this.getPersonnes()) {
-			r += "\t<Personne>" + "\n\t\t<pseudo>" + p.getPseudo() + "</pseudo>" + "\n\t\t<description>"
-					+ p.getDescription() + "</description>" + "\n\t\t<nbCommentaire>" + p.getNbCommentaire()
-					+ "</nbCommentaire>" + "\n\t</Personne>\n";
+			r += "<personnes>\r\n" + "<dateInscription>2018-04-07T00:00:50.289+02:00</dateInscription>\r\n"
+					+ "<description>Je parle pour rien</description>\r\n" + "<nbCommentaire>6</nbCommentaire>\r\n"
+					+ "<pseudo>" + p.getPseudo() + "</pseudo>\r\n" + "</personnes>";
 		}
 		return r += "</ListePersonne>\n";
 	}

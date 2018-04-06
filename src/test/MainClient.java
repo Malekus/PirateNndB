@@ -2,7 +2,7 @@ package test;
 
 import client.Client;
 
-public class MainCLient implements Runnable{
+public class MainClient implements Runnable{
 	
 	@Override
 	public void run() {

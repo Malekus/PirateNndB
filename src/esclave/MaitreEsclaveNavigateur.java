@@ -26,17 +26,20 @@ public class MaitreEsclaveNavigateur implements Runnable {
 	public void run() {
 		System.out.println("Connexion en Navigateur");
 		while (!client.isClosed()) {
-			try {
-				lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-				ecriture = new PrintWriter(getClient().getOutputStream(), true);
-				if(this.first.length != 0) {
+			try {				
+				String commande[];
+				if(this.first != null) {
+					commande = this.first;
 					this.first = null;
-					ecriture.println("<html>Salut</html>");
+				}else {
+					lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
+					commande = lecture.readLine().split(" ");
 				}
-				
+				ecriture = new PrintWriter(getClient().getOutputStream(), true);
+				ecriture.println("<html>Salut toi<html>");
 
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				System.err.println(e.getMessage());
 			}
 		}
 	}

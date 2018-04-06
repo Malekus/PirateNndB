@@ -17,12 +17,7 @@ public class XMLPiraterie {
 	public static void main(String[] args) {
 		Gestionnaire.initialisation();		
 		ecriture(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne");
-		System.out.println(lecture(new ListePersonne(), "personne"));
-		ArrayList<String> params = new ArrayList<String>();
-		params.add("description-Je parle pour rien");
-		params.add("pseudo-Kader");
-		System.out.println("Résutat recherche !!");
-		rechercher(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne", params);
+		//System.out.println(lecture(new ListePersonne(), "personne"));
 	}
 
 	public static void ecriture(Object obj, String filename) {

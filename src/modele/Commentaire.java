@@ -2,11 +2,17 @@ package modele;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Commentaire {
 	private Personne personne;
 	private Date dateCommentaire;
 	private String texte;
 
+	public Commentaire() {
+	}
+	
 	public Commentaire(Personne personne, Date dateCommentaire, String commentaire) {
 		this.personne = personne;
 		this.dateCommentaire = dateCommentaire;
@@ -53,5 +59,12 @@ public class Commentaire {
 			break;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Commentaire [personne=" + personne + ", dateCommentaire=" + dateCommentaire + ", texte=" + texte + "]";
+	}
+	
+	
 
 }
