@@ -18,20 +18,31 @@ public class MaitreEsclaveLocal implements Runnable {
 	private final Serveur serveur;
 	private BufferedReader lecture = null;
 	private PrintWriter ecriture = null;
+	private String first[];
 	private boolean enCours = true;
 
-	public MaitreEsclaveLocal(Socket client, Serveur serveur) {
+	public MaitreEsclaveLocal(Socket client, Serveur serveur, String first[]) {
 		this.client = client;
 		this.serveur = serveur;
+		this.first = first;
 	}
 
 	public void run() {
 		System.out.println("Connexion en Local");
 		while (!client.isClosed()) {
 			try {
-				lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-				ecriture = new PrintWriter(getClient().getOutputStream(), true);
-				String commande[] = lecture.readLine().split(" ");
+				String commande[];
+				if(this.first != null) {
+					commande = this.first;
+					this.first = null;
+				}else {
+					lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
+					ecriture = new PrintWriter(getClient().getOutputStream(), true);
+					commande = lecture.readLine().split(" ");
+				}
+				
+				System.out.println(commande[0]);
+				
 				switch (commande[0].toUpperCase()) {
 
 				case "PERSONNE": {
@@ -52,12 +63,12 @@ public class MaitreEsclaveLocal implements Runnable {
 					break;
 
 				default:
-					ecriture.println("Aucun commande associée");
+					ecriture.println("Aucun commande associï¿½e");
 					break;
 				}
 
 				if (commande[0].equals("FIN")) {
-					ecriture.println("Vous vous etes déconnecté");
+					ecriture.println("Vous vous etes dï¿½connectï¿½");
 					getClient().close();
 				}
 			} catch (IOException e) {

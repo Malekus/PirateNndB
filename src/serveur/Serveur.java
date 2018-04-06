@@ -1,16 +1,16 @@
 package serveur;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.Naming;
-import java.rmi.registry.LocateRegistry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import esclave.MaitreEsclaveLocal;
+import esclave.MaitreEsclaveNavigateur;
 import modele.Gestionnaire;
-import rmi.LogementImpl;
 
 public class Serveur {
 	private ServerSocket serveur;
@@ -30,31 +30,23 @@ public class Serveur {
 
 	public void lancement() {
 		Gestionnaire.initialisation();
-		System.out.println("Serveur lancé");
+		System.out.println("Serveur lancÃ©");
 		while (allume) {
 			try {
 				this.setSocket(this.getServeur().accept());
-				System.out.println("Une personne s'est connecté");
-				/*BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
+				System.out.println("Une personne s'est connectÃ©");
+				BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
 				String requete[] = lecture.readLine().split(" ");
-				System.out.println(lecture.readLine());*/
-				/*if (requete[0].equals("GET") && requete[2].equals("HTTP/1.1")) {
-					pool.execute(new MaitreEsclaveNavigateur(this.getSocket(), this));
-				} else {*/
-				pool.execute(new MaitreEsclaveLocal(this.getSocket(), this));
-				//}
-				
-				
-				//PARTIE RMI
-				/*LocateRegistry.createRegistry(2018);
-				LogementImpl od = new LogementImpl();
-				System.out.println(od.toString());
-				Naming.rebind("rmi://localhost:2018/BK", od);*/
-				
-				
+				if(requete[0].equals("GET")) {
+					pool.execute(new MaitreEsclaveNavigateur(getSocket(), this, requete));;
+				}
+				else {
+					pool.execute(new MaitreEsclaveLocal(getSocket(), this, requete));;
+				}
+
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
-				;
+
 			}
 		}
 

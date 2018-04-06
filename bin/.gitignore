@@ -1,7 +1,6 @@
-/test/
-/esclave/
-/client/
-/serveur/
 /modele/
 /rmi/
+/serveur/
+/test/
 /xml/
+/esclave/
