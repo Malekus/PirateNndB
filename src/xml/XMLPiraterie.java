@@ -1,6 +1,8 @@
 package xml;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,15 +14,12 @@ import modele.Gestionnaire;
 public class XMLPiraterie {
 
 	public static void main(String[] args) {
-		Gestionnaire.initialisation();
-		ListeLogement lg = new ListeLogement(Gestionnaire.TousLesLogements);
-		ListeEmplacement e = new ListeEmplacement(Gestionnaire.TousLesEmplacements);
+		Gestionnaire.initialisation();		
 		ecriture(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne");
-		ecriture(new ListeCommentaire(Gestionnaire.TousLesCommentaires), "commentaire");
-		ecriture(lg, "logement");
-		ecriture(e, "emplacement");
-		lecture(new ListePersonne(), "personne");
-		lecture(new ListeEmplacement(), "emplacement");
+		System.out.println(lecture(new ListePersonne(), "personne"));
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("pseudo", "Kader");
+		rechercher(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne", params);
 	}
 
 	public static void ecriture(Object obj, String filename) {
@@ -35,19 +34,20 @@ public class XMLPiraterie {
 		}
 	}
 
-	public static void lecture(Object obj, String filename) {
-
+	public static String lecture(Object obj, String filename) {
+		String r = "";
 		try {
 			File file = new File("Sauvegarde/" + filename + ".xml");
 			JAXBContext jaxbContext;
 			jaxbContext = JAXBContext.newInstance(obj.getClass());
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Object xo = (Object) jaxbUnmarshaller.unmarshal(file);
-			System.out.println(xo);
+			return xo.toString();
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+
 		}
+		return r;
 
 	}
 
@@ -59,8 +59,13 @@ public class XMLPiraterie {
 
 	}
 
-	public static void rechercher() {
-
+	public static void rechercher(Object obj, String filename, HashMap<String, Object> params) {
+		String recherche = "";
+		if(filename.equals("personne")) {
+			ListePersonne lp = (ListePersonne) obj;
+			recherche = lp.rechercher(params);
+			System.out.println(recherche);
+		}
 	}
 
 }

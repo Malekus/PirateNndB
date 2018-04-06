@@ -16,14 +16,4 @@ public class ListeCommentaire {
 		this.lesCommentaires = commentaires;
 	}
 
-	public ArrayList<Commentaire> getLesCommentaires() {
-		return lesCommentaires;
-	}
-
-	public void setLesCommentaires(ArrayList<Commentaire> lesCommentaires) {
-		this.lesCommentaires = lesCommentaires;
-	}
-	
-	
-
 }

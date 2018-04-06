@@ -1,5 +1,7 @@
 package modele;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ public class Personne {
 
 	public Personne() {
 	}
-	
+
 	public Personne(String pseudo, String description, int nbCommentaire, Date dateInscription) {
 		this.pseudo = pseudo;
 		this.description = description;
@@ -90,6 +92,43 @@ public class Personne {
 		default:
 			break;
 		}
+	}
+
+	public Object getters(String attr) {
+		Method method;
+		try {
+			method = this.getClass().getMethod("get" + attr, null);
+			Object objet = method.invoke(this, null);
+			return objet;
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return new Object();
+	}
+
+	public void setters(String attr, Object param) {
+		Method method;
+		try {
+			method = this.getClass().getMethod("set" + attr, param.getClass());
+			Object objet = method.invoke(this, param);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) throws NoSuchMethodException, SecurityException {
+		Gestionnaire.initialisation();
+		System.out.println(Gestionnaire.ToutesLesPersonnes.get(1).getters("Pseudo"));
+		Gestionnaire.ToutesLesPersonnes.get(1).setters("Pseudo", "hannnaee");
+		System.out.println(Gestionnaire.ToutesLesPersonnes.get(1).getters("Pseudo"));
 	}
 
 }
