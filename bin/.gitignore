@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-/client/
 /esclave/
-/xml/
-/modele/
-=======
-/modele/
-/rmi/
 /serveur/
+/client/
 /test/
-/xml/
-/esclave/
->>>>>>> 154e5f78fd0a28a39e4387ac7f7b07fb8bd38bda

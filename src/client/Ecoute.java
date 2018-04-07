@@ -22,7 +22,7 @@ public class Ecoute implements Runnable {
 	public void run() {
 		while (!socket.isClosed()) {
 			try {
-				System.out.println("Vous avez recu : " + this.lecture.readLine());
+				System.err.println(this.lecture.readLine());
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}

@@ -24,8 +24,15 @@ public class Demande implements Runnable {
 		Scanner sc = new Scanner(System.in);
 		String requete = null;
 		while (!socket.isClosed()) {
+			System.out.print(">> ");
 			requete = sc.nextLine();
 			this.ecriture.println(requete);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (requete.equals("FIN")) {
 				try {
 					socket.close();
@@ -33,6 +40,7 @@ public class Demande implements Runnable {
 					e.printStackTrace();
 				}
 			}
+			
 		}
 
 	}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -36,13 +37,23 @@ public class Serveur {
 				this.setSocket(this.getServeur().accept());
 				System.out.println("Une personne s'est connecté");
 				BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
+
+				/*
+				 * while(!ligne.isEmpty()) { requete.add(ligne); ligne = lecture.readLine(); }
+				 */
+
+				/*
+				 * System.out.println(requete.toString());
+				 * 
+				 * if(requete.get(0).split(" ")[0].equals("GET")) { pool.execute(new
+				 * MaitreEsclaveNavigateur(getSocket(), this, requete));
+				 * 
+				 * } else { String req[] = new String[requete.size()]; req =
+				 * requete.toArray(req); for (String e : requete) { System.out.println(e); }
+				 */
 				String requete[] = lecture.readLine().split(" ");
-				if(requete[0].equals("GET")) {
-					pool.execute(new MaitreEsclaveNavigateur(getSocket(), this, requete));;
-				}
-				else {
-					pool.execute(new MaitreEsclaveLocal(getSocket(), this, requete));;
-				}
+				pool.execute(new MaitreEsclaveLocal(getSocket(), this, requete));
+				// }
 
 			} catch (IOException e) {
 				System.out.println(e.getMessage());

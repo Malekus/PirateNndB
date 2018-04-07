@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import serveur.Serveur;
 
@@ -14,10 +15,10 @@ public class MaitreEsclaveNavigateur implements Runnable {
 	private final Serveur serveur;
 	private BufferedReader lecture = null;
 	private PrintWriter ecriture = null;
-	private String first[];
+	private ArrayList<String> first;
 	private boolean enCours = true;
 
-	public MaitreEsclaveNavigateur(Socket client, Serveur serveur, String first[]) {
+	public MaitreEsclaveNavigateur(Socket client, Serveur serveur, ArrayList<String> first) {
 		this.client = client;
 		this.serveur = serveur;
 		this.first = first;
@@ -26,27 +27,39 @@ public class MaitreEsclaveNavigateur implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("Connexion en Navigateur");
-		while (!client.isClosed()) {
+		while (!getClient().isClosed()) {
 			try {				
-				String commande[];
+				ArrayList<String> commande;
 				if(this.first != null) {
 					commande = this.first;
 					this.first = null;
 				}else {
 					lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-					commande = lecture.readLine().split(" ");
+					String line = lecture.readLine();
+					commande = new ArrayList<String>();
+					while(!line.isEmpty()) {
+						commande.add(line);
+						line = lecture.readLine();
+					}
 				}
-				/*ecriture = new PrintWriter(getClient().getOutputStream(), true);
-				ecriture.println("<html>Salut toi<html>");*/
-				PrintStream p = new PrintStream(getClient().getOutputStream(), true);
-				p.println("<html>Salut toi<html>");
-				p.close();
+				
+				for(String e : commande) {
+					System.out.println(e);
+				}
+				ecriture = new PrintWriter(getClient().getOutputStream(), true);
+				ecriture.println("HTTP/1.1 200 OK\r\n");
+				ecriture.println("<html>Salut toi<html>");
+				ecriture.println("\r\n");
+				getClient().close();
+				
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 			}
 		}
 	}
 
+	
+	
 	public Socket getClient() {
 		return client;
 	}
