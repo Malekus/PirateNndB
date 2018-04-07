@@ -3,6 +3,7 @@ package modele;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,8 +49,18 @@ public class Personne {
 
 	@Override
 	public String toString() {
-		return "Personne [pseudo=" + pseudo + ", description=" + description + ", nbCommentaire=" + nbCommentaire
-				+ ", dateInscription=" + dateInscription + ", langues=" + langues + "]";
+		String r = "\n<Personne>\n";
+		r += "\t<Pseudo>" + getPseudo() + "<Pseudo>\n";
+		r += "\t<Description>" + getDescription() + "<Description>\n";
+		r += "\t<nbCommentaire>" + getNbCommentaire() + "<nbCommentaire>\n";
+		r += "\t<dateInscription>" + getDateInscription() + "<dateInscription>\n";
+		r += "\t<Langues>";
+		for (Langue l : getLangues()) {
+			r += "\t\t<Langue>" + l.getName() + "<Langue>\n";
+		}
+		r += "\n\t</Langues>\n</Personne>";
+
+		return r;
 	}
 
 	public void setPseudo(String pseudo) {
@@ -74,7 +85,8 @@ public class Personne {
 
 	public Object getters(String attr) {
 		try {
-			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
+			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
+					null);
 			Object objet = method.invoke(this, null);
 			return objet;
 		} catch (NoSuchMethodException e) {
@@ -87,12 +99,19 @@ public class Personne {
 		return new Object();
 	}
 
-	public void setters(String attr, Object param) {
+	public boolean setters(String attr, Object param) {
+		String functionName = "set" + attr.substring(0, 1).toUpperCase() + attr.substring(1);
 		Method method;
+		boolean define = true;
 		try {
-			method = this.getClass().getMethod("set" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
-					param.getClass());
+			define = Arrays.asList(this.getClass().getMethods()).stream()
+					.anyMatch(m -> m.getName().equals(functionName));
+			if (!define)
+				return define;
+
+			method = this.getClass().getMethod(functionName, param.getClass());
 			Object objet = method.invoke(this, param);
+
 		} catch (NoSuchMethodException e) {
 			System.err.println(e.getMessage());
 		} catch (SecurityException e) {
@@ -100,6 +119,7 @@ public class Personne {
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			System.err.println(e.getMessage());
 		}
+		return define;
 	}
 
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException {

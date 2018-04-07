@@ -5,6 +5,7 @@ import java.util.Date;
 
 import modele.Gestionnaire;
 import modele.Personne;
+import xml.XMLPirateNndB;
 
 public class EsclavePersonne extends Esclave {
 	public EsclavePersonne(String string[], PrintWriter out) {
@@ -13,45 +14,54 @@ public class EsclavePersonne extends Esclave {
 	}
 
 	public void traintement() {
-		switch (getRequete()[1].toUpperCase()) {
-		case "CREER": {
-			Personne personne = new Personne(getRequete()[2], getRequete()[3], 0, new Date());
+		switch (getRequete()[2].replace("\t", "").replace("\n", "")) {
+		case "<Creer>": {
+			Personne personne = new Personne(XMLPirateNndB.getValue(getRequete()[3]),
+					XMLPirateNndB.getValue(getRequete()[4]), 0, new Date());
 			Gestionnaire.ToutesLesPersonnes.add(personne);
 			getOut().println("Vous avez creer une personne");
 		}
 			break;
 
-		case "AFFICHER": {
-			if (getRequete().length == 2) {
+		case "<Afficher>": {
+			if (getRequete()[3].contains("</Afficher>")) {
 				getOut().println(Gestionnaire.ToutesLesPersonnes);
 			} else {
 				Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
-						.filter(p -> p.getPseudo().equals(getRequete()[2])).findAny().orElse(null);
-				;
-				getOut().println(personne);
+						.filter(p -> p.getPseudo().equals(XMLPirateNndB.getValue(getRequete()[3]))).findAny()
+						.orElse(null);
+				if (personne != null) {
+					getOut().println(personne);
+				} else {
+					getOut().println("Cette personne n'existe pas");
+				}
 			}
 
 		}
 			break;
 
-		case "MODIFIER": {
+		case "<Modifier>": {
 			Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
-					.filter(p -> p.getPseudo().equals(getRequete()[2])).findAny().orElse(null);
-			;
-			if(personne == null) {
-				getOut().println("Cette personne n'existe pas !");
-			}else{
-				personne.setters(getRequete()[3], getRequete()[4]);
-				getOut().println("Personne modifié");
-				getOut().println(personne);
+					.filter(p -> p.getPseudo().equals(XMLPirateNndB.getValue(getRequete()[3]))).findAny().orElse(null);
+			if (personne != null) {
+				boolean methodeDefine = personne.setters(XMLPirateNndB.getValue(getRequete()[4]),
+						XMLPirateNndB.getValue(getRequete()[5]));
+				if (!methodeDefine) {
+					getOut().println("L'attribut selectionné n'existe pas ");
+				} else {
+					getOut().println("Vous avez modifié une personne");
+					getOut().println(personne);
+				}
+
+			} else {
+				getOut().println("Cette personne n'existe pas");
 			}
-			
 
 		}
 			break;
 
 		default: {
-			getOut().println("Aucun commande associée");
+			getOut().println("Aucun commande associée" + getClass());
 		}
 			break;
 		}

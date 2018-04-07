@@ -20,13 +20,10 @@ public class Ecoute implements Runnable {
 	}
 
 	public void run() {
-		boolean stop = false;
-		while (!socket.isClosed() && stop) {
+		while (!socket.isClosed()) {
 			try {
 				System.err.println(this.lecture.readLine());
-				Thread.sleep(500);
-				stop = this.lecture.readLine().isEmpty();
-			} catch (IOException | InterruptedException e) {
+			} catch (IOException e) {
 				System.out.println(getClass());
 				System.out.println(e.getMessage());
 			}

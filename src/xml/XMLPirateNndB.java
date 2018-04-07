@@ -12,7 +12,7 @@ import javax.xml.bind.Unmarshaller;
 
 import modele.Gestionnaire;
 
-public class XMLPiraterie {
+public class XMLPirateNndB {
 
 	public static void main(String[] args) {
 		Gestionnaire.initialisation();		
@@ -64,6 +64,10 @@ public class XMLPiraterie {
 			recherche = lp.rechercher(params);
 			System.out.println(recherche);
 		}
+	}
+	
+	public static String getValue(String s) {
+		return s.replace("\t", "").replaceAll("\n", "").split(">")[1].split("</")[0];
 	}
 
 }

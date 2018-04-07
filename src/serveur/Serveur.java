@@ -30,7 +30,7 @@ public class Serveur {
 	}
 
 	public void lancement() {
-		//Gestionnaire.initialisation();
+		Gestionnaire.initialisation();
 		System.out.println("Serveur lancé");
 		while (allume) {
 			try {

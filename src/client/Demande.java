@@ -48,13 +48,41 @@ public class Demande implements Runnable {
 				case "1": {
 					System.out.println("Pseudo de la personne");
 					String pseudo = sc.nextLine();
-					xmlRequete += "\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
+					xmlRequete += "\t\t<Creer>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
 					System.out.println("Description de la personne");
 					String description = sc.nextLine();
-					xmlRequete += "\t\t<Description>" + description + "</Description>\n";
-					xmlRequete += "\t</Personne>\n</Requete>\n";
+					xmlRequete += "\t\t\t<Description>" + description + "</Description>\n";
+					xmlRequete += "\t\t</Creer>\n\t</Personne>\n</Requete>\n";
 					ecriture.println(xmlRequete);
 				}
+					break;
+				case "2": {
+					System.out.println("Pseudo de la personne");
+					String pseudo = sc.nextLine();
+					xmlRequete += "\t\t<Afficher>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
+					xmlRequete += "\t\t</Afficher>\n\t</Personne>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "3": {
+					xmlRequete += "\t\t<Afficher>\t\t\n</Afficher>\n\t</Personne>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "4": {
+					System.out.println("Pseudo de la personne");
+					String pseudo = sc.nextLine();
+					System.out.println("Attribut de la personne");
+					String attribut = sc.nextLine();
+					System.out.println("Valeur ?");
+					String valeur = sc.nextLine();
+					xmlRequete += "\t\t<Modifier>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
+					xmlRequete += "\t\t\t<Attribut>"+attribut+"</Attribut>\n";
+					xmlRequete += "\t\t\t<Valeur>"+valeur+"</Valeur>\n";
+					xmlRequete += "\t\t</Modifier>\n\t<Personne>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
 				default:
 					break;
 				}
@@ -62,7 +90,7 @@ public class Demande implements Runnable {
 				break;
 
 			case "Q": {
-				xmlRequete = "<Requete>\n\t<Quitter></Quitter>\n</Requete>\n";
+				xmlRequete = "<Requete>\n\t<Quitter>\n\t</Quitter>\n</Requete>\n";
 				this.ecriture.println(xmlRequete);
 				System.out.println("Vous vous etes déconnecté");
 				stop = true;

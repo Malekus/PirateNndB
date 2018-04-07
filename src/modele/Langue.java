@@ -1,7 +1,7 @@
 package modele;
 
 public enum Langue {
-	francais("FranÃ§ais"),
+	francais("Français"),
 	anglais("Anglais"),
 	espagnol("Espagnol");
 	
@@ -13,5 +13,9 @@ public enum Langue {
 	
 	public String toString() {
 		return this.name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
