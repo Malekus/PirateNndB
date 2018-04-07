@@ -15,8 +15,8 @@ public class Demande implements Runnable {
 		try {
 			this.ecriture = new PrintWriter(socket.getOutputStream(), true);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(getClass());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -42,6 +42,7 @@ public class Demande implements Runnable {
 				System.out.println("2 - Afficher une personne");
 				System.out.println("3 - Afficher toutes les personnes");
 				System.out.println("4 - Modifier une personne");
+				System.out.println("5 - Supprimer une personne");
 				System.out.println("m - Retourner Menu");
 				requete = sc.nextLine();
 				switch (requete) {
@@ -81,8 +82,15 @@ public class Demande implements Runnable {
 					xmlRequete += "\t\t\t<Valeur>"+valeur+"</Valeur>\n";
 					xmlRequete += "\t\t</Modifier>\n\t<Personne>\n</Requete>\n";
 					ecriture.println(xmlRequete);
-				}
-					break;
+				}break;
+				
+				case "5": {
+					System.out.println("Pseudo de la personne");
+					String pseudo = sc.nextLine();
+					xmlRequete += "\t\t<Supprimer>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
+					xmlRequete += "\t\t</Supprimer>\n\t<Personne>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}break;
 				default:
 					break;
 				}
@@ -102,7 +110,7 @@ public class Demande implements Runnable {
 			}
 
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}

@@ -3,10 +3,6 @@ package modele;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.security.auth.callback.LanguageCallback;
-
-import xml.ListeLangue;
-
 public class Gestionnaire {
 	public static ArrayList<Personne> ToutesLesPersonnes = new ArrayList<Personne>();
 	public static ArrayList<Logement> TousLesLogements = new ArrayList<Logement>();

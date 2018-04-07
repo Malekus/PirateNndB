@@ -67,7 +67,7 @@ public class Personne {
 
 	@Override
 	public String toString() {
-		String r = "\n<personne>\n";
+		String r = "<personne>\n";
 		r += "\t<pseudo>" + getPseudo() + "</pseudo>\n";
 		r += "\t<description>" + getDescription() + "</description>\n";
 		r += "\t<nbCommentaire>" + getNbCommentaire() + "</nbCommentaire>\n";
@@ -75,7 +75,7 @@ public class Personne {
 		r += "\t<langues>\n";
 
 		if (getLangues().size() == 0) {
-			r += "\t</langues>\n</personne>\n";
+			r += "\t</langues>\n</personne>";
 			return r;
 		}
 
@@ -83,7 +83,7 @@ public class Personne {
 			r += "\t\t" + l.toString();
 		}
 
-		r += "\t</langues>\n</personne>\n";
+		r += "\t</langues>\n</personne>";
 
 		return r;
 	}

@@ -14,13 +14,13 @@ public class XMLPirateNndB {
 
 	public static void main(String[] args) {
 		Gestionnaire.initialisation();		
-		ecriture(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne");
+		ecriture(new ListePersonne(), "personne");
 		System.out.println(lecture(new ListePersonne(), "personne"));
 	}
 
-	public static void ecriture(ListePersonne obj, String filename) {
+	public static void ecriture(Object obj, String filename) {
 		try {
-			JAXBContext context = JAXBContext.newInstance(ListePersonne.class);
+			JAXBContext context = JAXBContext.newInstance(obj.getClass());
 			Marshaller m;
 			m = context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -37,21 +37,20 @@ public class XMLPirateNndB {
 			JAXBContext jaxbContext;
 			jaxbContext = JAXBContext.newInstance(obj.getClass());
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			Object xo = (Object) jaxbUnmarshaller.unmarshal(file);
-			return xo.toString();
+			Object o = (Object) jaxbUnmarshaller.unmarshal(file);
+			return o.toString();
 		} catch (JAXBException e) {
 			System.out.println(e.getMessage());
-
 		}
 		return r;
 
 	}
 
-	public static void supprimer() {
-
+	public static void supprimer(Object obj, String filename) {
+		
 	}
 
-	public static void ajouter() {
+	public static void ajouter(Object obj, String filename) {
 
 	}
 

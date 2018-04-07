@@ -35,26 +35,18 @@ public class Serveur {
 	public void lancement() {
 		Gestionnaire.initialisation();
 		System.out.println("Serveur lancé");
-		
-		try {
-			LocateRegistry.createRegistry(1099);
-			ServeurImpl od = new ServeurImpl();
-			System.out.println(od.toString());
-			Naming.rebind("rmi://localhost:1099/ADD", od);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-				
+
+		/*
+		 * try { LocateRegistry.createRegistry(1099); ServeurImpl od = new
+		 * ServeurImpl(); System.out.println(od.toString());
+		 * Naming.rebind("rmi://localhost:1099/ADD", od); } catch (Exception e) {
+		 * System.out.println(e); }
+		 */
+
 		while (allume) {
 			try {
 				this.setSocket(this.getServeur().accept());
 				System.out.println("Une personne s'est connecté");
-				/*BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
-				String requete[] = lecture.readLine().split("\\n");
-
-				for(String e : requete) {
-					System.out.println(e);
-				}*/
 				pool.execute(new MaitreEsclaveLocal(getSocket(), this));
 
 			} catch (IOException e) {

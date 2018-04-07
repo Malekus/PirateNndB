@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import modele.Gestionnaire;
 import modele.Personne;
 
 @XmlRootElement
@@ -13,7 +14,7 @@ public class ListePersonne {
 	private ArrayList<Personne> personne;
 
 	public ListePersonne() {
-		this.personne = new ArrayList<Personne>();
+		this.personne = Gestionnaire.ToutesLesPersonnes;
 	}
 
 	public ListePersonne(ArrayList<Personne> personne) {
@@ -51,9 +52,7 @@ public class ListePersonne {
 				}
 			}
 			resultat = (ArrayList<Personne>) personne;
-
 		}
-
 		return lp.toString();
 	}
 

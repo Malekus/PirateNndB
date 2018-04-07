@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <listePersonne>
     <personnes>
-        <dateInscription>2018-04-07T20:38:50.923+02:00</dateInscription>
+        <dateInscription>2018-04-07T22:26:53.362+02:00</dateInscription>
         <description>Je parle pour rien</description>
         <langues>francais</langues>
         <langues>anglais</langues>
@@ -9,21 +9,15 @@
         <pseudo>Kader</pseudo>
     </personnes>
     <personnes>
-        <dateInscription>2018-04-07T20:38:50.923+02:00</dateInscription>
+        <dateInscription>2018-04-07T22:26:53.362+02:00</dateInscription>
         <description>FiaseNA</description>
         <nbCommentaire>6</nbCommentaire>
         <pseudo>Nafise</pseudo>
     </personnes>
     <personnes>
-        <dateInscription>2018-04-07T20:38:50.923+02:00</dateInscription>
+        <dateInscription>2018-04-07T22:26:53.362+02:00</dateInscription>
         <description>Je parle pour rien</description>
         <nbCommentaire>6</nbCommentaire>
         <pseudo>Hannae</pseudo>
-    </personnes>
-    <personnes>
-        <dateInscription>2018-04-07T20:38:50.923+02:00</dateInscription>
-        <description>ptotodz dz dazd</description>
-        <nbCommentaire>6</nbCommentaire>
-        <pseudo>Pseudo54</pseudo>
     </personnes>
 </listePersonne>
