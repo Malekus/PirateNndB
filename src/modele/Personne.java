@@ -72,32 +72,9 @@ public class Personne {
 		this.langues = langues;
 	}
 
-	public void set(String attr, Object obj) {
-		switch (attr) {
-		case "pseudo":
-			this.setPseudo((String) obj);
-			break;
-		case "description":
-			this.setDescription((String) obj);
-			break;
-		case "nbCommentaire":
-			this.setNbCommentaire((int) obj);
-			break;
-		case "dateInscription":
-			this.setDateInscription(((Date) obj));
-			break;
-		case "langues":
-			this.setLangues((ArrayList<Langue>) obj);
-			break;
-		default:
-			break;
-		}
-	}
-
 	public Object getters(String attr) {
-		Method method;
 		try {
-			method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
+			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
 			Object objet = method.invoke(this, null);
 			return objet;
 		} catch (NoSuchMethodException e) {

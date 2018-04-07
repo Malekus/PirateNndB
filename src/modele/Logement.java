@@ -1,5 +1,7 @@
 package modele;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class Logement {
@@ -73,28 +75,34 @@ public class Logement {
 				+ commentaires + ", disponibilite=" + disponibilite + ", prix=" + prix + "]";
 	}
 
-	public void set(String attr, Object obj) {
-		switch (attr) {
-		case "hote":
-			this.setHote((Personne) obj);
-			break;
-		case "lieu":
-			this.setLieu((Emplacement) obj);
-			break;
-		case "equipement":
-			this.getEquipements().add((Equipement) obj);
-			break;
-		case "prix":
-			this.setPrix((float) obj);
-			break;
-		case "disponible":
-			this.setDisponibilite((Disponibilite) obj);
-			break;
-		case "commentaire":
-			this.getCommentaires().add((Commentaire) obj);
-			break;
-		default:
-			break;
+	
+	public Object getters(String attr) {
+		try {
+			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
+			Object objet = method.invoke(this, null);
+			return objet;
+		} catch (NoSuchMethodException e) {
+			System.err.println(e.getMessage());
+		} catch (SecurityException e) {
+			System.err.println(e.getMessage());
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			System.err.println(e.getMessage());
+		}
+		return new Object();
+	}
+
+	public void setters(String attr, Object param) {
+		Method method;
+		try {
+			method = this.getClass().getMethod("set" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
+					param.getClass());
+			Object objet = method.invoke(this, param);
+		} catch (NoSuchMethodException e) {
+			System.err.println(e.getMessage());
+		} catch (SecurityException e) {
+			System.err.println(e.getMessage());
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 

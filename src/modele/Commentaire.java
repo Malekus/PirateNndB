@@ -1,5 +1,7 @@
 package modele;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,28 +45,39 @@ public class Commentaire {
 		this.texte = texte;
 	}
 
-	public void set(String attr, Object obj) {
-		switch (attr) {
-		case "personne":
-			this.setPersonne((Personne) obj);
-			break;
-		case "dateCommentaire":
-			this.setDateCommentaire((Date) obj);
-			break;
-		case "texte":
-			this.setTexte((String) obj);
-			break;
-
-		default:
-			break;
-		}
-	}
-
 	@Override
 	public String toString() {
 		return "Commentaire [personne=" + personne + ", dateCommentaire=" + dateCommentaire + ", texte=" + texte + "]";
 	}
 	
-	
+	public Object getters(String attr) {
+		try {
+			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
+			Object objet = method.invoke(this, null);
+			return objet;
+		} catch (NoSuchMethodException e) {
+			System.err.println(e.getMessage());
+		} catch (SecurityException e) {
+			System.err.println(e.getMessage());
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			System.err.println(e.getMessage());
+		}
+		return new Object();
+	}
+
+	public void setters(String attr, Object param) {
+		Method method;
+		try {
+			method = this.getClass().getMethod("set" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
+					param.getClass());
+			Object objet = method.invoke(this, param);
+		} catch (NoSuchMethodException e) {
+			System.err.println(e.getMessage());
+		} catch (SecurityException e) {
+			System.err.println(e.getMessage());
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			System.err.println(e.getMessage());
+		}
+	}
 
 }

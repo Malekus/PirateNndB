@@ -41,7 +41,7 @@ public class EsclavePersonne extends Esclave {
 			if(personne == null) {
 				getOut().println("Cette personne n'existe pas !");
 			}else{
-				personne.set(getRequete()[3], getRequete()[4]);
+				personne.setters(getRequete()[3], getRequete()[4]);
 				getOut().println("Personne modifié");
 				getOut().println(personne);
 			}
