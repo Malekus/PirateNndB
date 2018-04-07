@@ -3,6 +3,10 @@ package modele;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.security.auth.callback.LanguageCallback;
+
+import xml.ListeLangue;
+
 public class Gestionnaire {
 	public static ArrayList<Personne> ToutesLesPersonnes = new ArrayList<Personne>();
 	public static ArrayList<Logement> TousLesLogements = new ArrayList<Logement>();
@@ -11,7 +15,10 @@ public class Gestionnaire {
 
 	
 	public static void initialisation() {
-		Gestionnaire.ToutesLesPersonnes.add(new Personne("Kader", "Je parle pour rien", 6, new Date()));
+		ArrayList<Langue> lg = new ArrayList<Langue>();
+		lg.add(Langue.francais);
+		lg.add(Langue.anglais);
+		Gestionnaire.ToutesLesPersonnes.add(new Personne("Kader", "Je parle pour rien", 6, new Date(), lg));
 		Gestionnaire.ToutesLesPersonnes.add(new Personne("Nafise", "FiaseNA", 6, new Date()));
 		Gestionnaire.ToutesLesPersonnes.add(new Personne("Hannae", "Je parle pour rien", 6, new Date()));
 		Gestionnaire.ToutesLesPersonnes.add(new Personne("Pseudo54", "ptotodz dz dazd", 6, new Date()));

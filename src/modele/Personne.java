@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -14,9 +17,15 @@ public class Personne {
 	private String description;
 	private int nbCommentaire;
 	private Date dateInscription;
+
 	private ArrayList<Langue> langues;
 
 	public Personne() {
+		this.pseudo = null;
+		this.description = null;
+		this.nbCommentaire = 0;
+		this.dateInscription = null;
+		this.langues = new ArrayList<Langue>();
 	}
 
 	public Personne(String pseudo, String description, int nbCommentaire, Date dateInscription) {
@@ -25,6 +34,15 @@ public class Personne {
 		this.nbCommentaire = nbCommentaire;
 		this.dateInscription = dateInscription;
 		this.langues = new ArrayList<Langue>();
+	}
+
+	public Personne(String pseudo, String description, int nbCommentaire, Date dateInscription,
+			ArrayList<Langue> langues) {
+		this.pseudo = pseudo;
+		this.description = description;
+		this.nbCommentaire = nbCommentaire;
+		this.dateInscription = dateInscription;
+		this.langues = langues;
 	}
 
 	public String getPseudo() {
@@ -49,16 +67,23 @@ public class Personne {
 
 	@Override
 	public String toString() {
-		String r = "\n<Personne>\n";
-		r += "\t<Pseudo>" + getPseudo() + "<Pseudo>\n";
-		r += "\t<Description>" + getDescription() + "<Description>\n";
-		r += "\t<nbCommentaire>" + getNbCommentaire() + "<nbCommentaire>\n";
-		r += "\t<dateInscription>" + getDateInscription() + "<dateInscription>\n";
-		r += "\t<Langues>";
-		for (Langue l : getLangues()) {
-			r += "\t\t<Langue>" + l.getName() + "<Langue>\n";
+		String r = "\n<personne>\n";
+		r += "\t<pseudo>" + getPseudo() + "</pseudo>\n";
+		r += "\t<description>" + getDescription() + "</description>\n";
+		r += "\t<nbCommentaire>" + getNbCommentaire() + "</nbCommentaire>\n";
+		r += "\t<dateInscription>" + getDateInscription() + "</dateInscription>\n";
+		r += "\t<langues>\n";
+
+		if (getLangues().size() == 0) {
+			r += "\t</langues>\n</personne>\n";
+			return r;
 		}
-		r += "\n\t</Langues>\n</Personne>";
+
+		for (Langue l : getLangues()) {
+			r += "\t\t" + l.toString();
+		}
+
+		r += "\t</langues>\n</personne>\n";
 
 		return r;
 	}

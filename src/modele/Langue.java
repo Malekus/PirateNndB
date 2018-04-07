@@ -11,8 +11,11 @@ public enum Langue {
 		this.name = langue;
 	}
 	
+	private Langue() {
+	}
+	
 	public String toString() {
-		return this.name;
+		return "<langue>"+getName()+"</langue>\n";
 	}
 	
 	public String getName() {

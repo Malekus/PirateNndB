@@ -2,8 +2,6 @@ package xml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -17,12 +15,12 @@ public class XMLPirateNndB {
 	public static void main(String[] args) {
 		Gestionnaire.initialisation();		
 		ecriture(new ListePersonne(Gestionnaire.ToutesLesPersonnes), "personne");
-		//System.out.println(lecture(new ListePersonne(), "personne"));
+		System.out.println(lecture(new ListePersonne(), "personne"));
 	}
 
-	public static void ecriture(Object obj, String filename) {
+	public static void ecriture(ListePersonne obj, String filename) {
 		try {
-			JAXBContext context = JAXBContext.newInstance(obj.getClass());
+			JAXBContext context = JAXBContext.newInstance(ListePersonne.class);
 			Marshaller m;
 			m = context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

@@ -1,11 +1,7 @@
 package xml;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,9 +32,7 @@ public class ListePersonne {
 	public String toString() {
 		String r = "<ListePersonne>\n";
 		for (Personne p : this.getPersonnes()) {
-			r += "<personnes>\r\n" + "<dateInscription>2018-04-07T00:00:50.289+02:00</dateInscription>\r\n"
-					+ "<description>Je parle pour rien</description>\r\n" + "<nbCommentaire>6</nbCommentaire>\r\n"
-					+ "<pseudo>" + p.getPseudo() + "</pseudo>\r\n" + "</personnes>";
+			r += p.toString()+"\n";
 		}
 		return r += "</ListePersonne>\n";
 	}
