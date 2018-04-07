@@ -3,6 +3,7 @@ package esclave;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -35,9 +36,11 @@ public class MaitreEsclaveNavigateur implements Runnable {
 					lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
 					commande = lecture.readLine().split(" ");
 				}
-				ecriture = new PrintWriter(getClient().getOutputStream(), true);
-				ecriture.println("<html>Salut toi<html>");
-
+				/*ecriture = new PrintWriter(getClient().getOutputStream(), true);
+				ecriture.println("<html>Salut toi<html>");*/
+				PrintStream p = new PrintStream(getClient().getOutputStream(), true);
+				p.println("<html>Salut toi<html>");
+				p.close();
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 			}
