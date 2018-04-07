@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,6 +35,16 @@ public class Serveur {
 	public void lancement() {
 		Gestionnaire.initialisation();
 		System.out.println("Serveur lancé");
+		
+		try {
+			LocateRegistry.createRegistry(1099);
+			ServeurImpl od = new ServeurImpl();
+			System.out.println(od.toString());
+			Naming.rebind("rmi://localhost:1099/ADD", od);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+				
 		while (allume) {
 			try {
 				this.setSocket(this.getServeur().accept());
