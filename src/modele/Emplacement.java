@@ -15,8 +15,11 @@ public class Emplacement {
 	}
 
 	public Emplacement() {
+		this.adresse = null;
+		this.ville = null;
+		this.pays = null;
 	}
-	
+
 	public String getAdresse() {
 		return adresse;
 	}
@@ -43,12 +46,17 @@ public class Emplacement {
 
 	@Override
 	public String toString() {
-		return "Emplacement a refaireee";
+		String r = "<emplacement>\n";
+		r += "\t<adresse>" + getAdresse() + "</adresse>\n";
+		r += "\t<ville>" + getVille() + "</ville>\n";
+		r += "\t<pays>" + getPays() + "</pays>\n</emplacement>\n";
+		return r;
 	}
 
 	public Object getters(String attr) {
 		try {
-			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
+			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
+					null);
 			Object objet = method.invoke(this, null);
 			return objet;
 		} catch (NoSuchMethodException e) {

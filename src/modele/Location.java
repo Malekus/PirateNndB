@@ -2,23 +2,23 @@ package modele;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Date;
+import java.util.Arrays;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class Commentaire {
+public class Location {
+	private int numero;
 	private Personne personne;
-	private Date dateCommentaire;
-	private String texte;
+	private Logement logement;
 
-	public Commentaire() {
+	public Location() {
+		this.numero = 0;
+		this.personne = null;
+		this.logement = null;
 	}
 
-	public Commentaire(Personne personne, Date dateCommentaire, String commentaire) {
+	public Location(int numero, Personne personne, Logement logement) {
+		this.numero = numero;
 		this.personne = personne;
-		this.dateCommentaire = dateCommentaire;
-		this.texte = commentaire;
+		this.logement = logement;
 	}
 
 	public Personne getPersonne() {
@@ -29,29 +29,25 @@ public class Commentaire {
 		this.personne = personne;
 	}
 
-	public Date getDateCommentaire() {
-		return dateCommentaire;
+	public Logement getLogement() {
+		return logement;
 	}
 
-	public void setDateCommentaire(Date dateCommentaire) {
-		this.dateCommentaire = dateCommentaire;
-	}
-
-	public String getTexte() {
-		return texte;
-	}
-
-	public void setTexte(String texte) {
-		this.texte = texte;
+	public void setLogement(Logement logement) {
+		this.logement = logement;
 	}
 
 	@Override
 	public String toString() {
-		String r = "<commentaire>\n";
-		r += "\t<personne>" + getPersonne() + "</personne>\n";
-		r += "\t<dateCommentaire>" + getDateCommentaire() + "</dateCommentaire>\n";
-		r += "\t<texte>" + getTexte() + "</texte>\n</commentaire>\n";
-		return r;
+		return "Location [personne=" + personne + ", logement=" + logement + "]";
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public Object getters(String attr) {
@@ -70,12 +66,19 @@ public class Commentaire {
 		return new Object();
 	}
 
-	public void setters(String attr, Object param) {
+	public boolean setters(String attr, Object param) {
+		String functionName = "set" + attr.substring(0, 1).toUpperCase() + attr.substring(1);
 		Method method;
+		boolean define = true;
 		try {
-			method = this.getClass().getMethod("set" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
-					param.getClass());
+			define = Arrays.asList(this.getClass().getMethods()).stream()
+					.anyMatch(m -> m.getName().equals(functionName));
+			if (!define)
+				return define;
+
+			method = this.getClass().getMethod(functionName, param.getClass());
 			Object objet = method.invoke(this, param);
+
 		} catch (NoSuchMethodException e) {
 			System.err.println(e.getMessage());
 		} catch (SecurityException e) {
@@ -83,6 +86,7 @@ public class Commentaire {
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			System.err.println(e.getMessage());
 		}
+		return define;
 	}
 
 }

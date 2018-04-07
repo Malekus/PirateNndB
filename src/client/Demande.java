@@ -30,7 +30,8 @@ public class Demande implements Runnable {
 			System.out.println("Menu");
 			System.out.println("1 - Personne");
 			System.out.println("2 - Logement");
-			System.out.println("3 - Emplacement");
+			System.out.println("3 - Location");
+			System.out.println("4 - Commentaire");
 			System.out.println("Q - Quitter");
 			System.out.print(">> ");
 			requete = sc.nextLine();
@@ -160,6 +161,69 @@ public class Demande implements Runnable {
 					String numero = sc.nextLine();
 					xmlRequete += "\t\t<Supprimer>\n\t\t\t<Numero>" + numero + "</Numero>\n";
 					xmlRequete += "\t\t</Supprimer>\n\t<Logement>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				default:
+					break;
+				}
+			}
+				break;
+			case "3": {
+				xmlRequete += "\t<Location>\n";
+				System.out.println("Menu - Location");
+				System.out.println("1 - Creer une location");
+				System.out.println("2 - Afficher une location");
+				System.out.println("3 - Afficher toutes les location");
+				System.out.println("4 - Modifier une location");
+				System.out.println("5 - Supprimer une location");
+				System.out.println("m - Retourner Menu");
+				requete = sc.nextLine();
+				switch (requete) {
+				case "1": {
+					System.out.println("Pseudo de la personne");
+					String pseudo = sc.nextLine();
+					xmlRequete += "\t\t<Creer>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
+					System.out.println("Numéro du logement");
+					String logement = sc.nextLine();
+					xmlRequete += "\t\t\t<Numero>" + logement + "</Numero>\n";
+					xmlRequete += "\t\t</Creer>\n\t</Location>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "2": {
+					System.out.println("Numero de la location");
+					String numero = sc.nextLine();
+					xmlRequete += "\t\t<Afficher>\n\t\t\t<Numero>" + numero + "</Numero>\n";
+					xmlRequete += "\t\t</Afficher>\n\t</Location>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "3": {
+					xmlRequete += "\t\t<Afficher>\n\t\t</Afficher>\n\t</Location>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "4": {
+					System.out.println("Numero de la location");
+					String numero = sc.nextLine();
+					System.out.println("Attribut de la personne");
+					String attribut = sc.nextLine();
+					System.out.println("Valeur ?");
+					String valeur = sc.nextLine();
+					xmlRequete += "\t\t<Modifier>\n\t\t\t<Numero>" + numero + "</Numero>\n";
+					xmlRequete += "\t\t\t<Attribut>" + attribut + "</Attribut>\n";
+					xmlRequete += "\t\t\t<Valeur>" + valeur + "</Valeur>\n";
+					xmlRequete += "\t\t</Modifier>\n\t<Location>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+
+				case "5": {
+					System.out.println("Numero de la location");
+					String numero = sc.nextLine();
+					xmlRequete += "\t\t<Supprimer>\n\t\t\t<Numero>" + numero + "</Numero>\n";
+					xmlRequete += "\t\t</Supprimer>\n\t<Location>\n</Requete>\n";
 					ecriture.println(xmlRequete);
 				}
 					break;
