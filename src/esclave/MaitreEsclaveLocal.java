@@ -27,49 +27,59 @@ public class MaitreEsclaveLocal implements Runnable {
 		this.first = first;
 	}
 
+	public MaitreEsclaveLocal(Socket client, Serveur serveur) {
+		this.client = client;
+		this.serveur = serveur;
+		this.first = null;
+	}
+
 	public void run() {
 		System.out.println("Connexion en Local");
-		while (!client.isClosed()) {
+		while (!getClient().isClosed()) {
 			try {
-				String commande[];
-				if(this.first != null) {
-					commande = this.first;
-					this.first = null;
-				}else {
-					lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
-					commande = lecture.readLine().split(" ");
+				lecture = new BufferedReader(new InputStreamReader(getClient().getInputStream()));
+				ArrayList<String> listeCommande = new ArrayList<String>();
+				String ligne = lecture.readLine();
+				while (!ligne.isEmpty()) {
+					listeCommande.add(ligne);
+					ligne = lecture.readLine();
 				}
-				ecriture = new PrintWriter(getClient().getOutputStream(), true);
-				
-				switch (commande[0].toUpperCase()) {
 
-				case "PERSONNE": {
+				ecriture = new PrintWriter(getClient().getOutputStream(), true);
+
+				String commande[] = new String[listeCommande.size()];
+				commande = listeCommande.toArray(commande);
+				switch (listeCommande.get(1).replaceAll("\n", "").replaceAll("\t", "")) {
+
+				case "<Personne>": {
 					new EsclavePersonne(commande, ecriture);
 				}
 					break;
-				case "LOGEMENT": {
+				case "<Logement>": {
 					new EsclaveLogement(commande, ecriture);
 				}
 					break;
-				case "COMMENTAIRE": {
+				case "<Commentaire>": {
 					new EsclaveCommentaire(commande, ecriture);
 				}
 					break;
-				case "EMPLACEMENT": {
+				case "<Emplacement>": {
 					new EsclaveEmplacement(commande, ecriture);
 				}
 					break;
 
 				default:
-					ecriture.println("Aucun commande associï¿½e");
+					ecriture.println("Aucun commande associé");
 					break;
 				}
 
-				if (commande[0].equals("FIN")) {
-					ecriture.println("Vous vous etes dï¿½connectï¿½");
+				if (listeCommande.get(1).replaceAll("\n", "").replaceAll("\t", "").equals("<Quitter></Quitter>")) {
 					getClient().close();
+					Thread.sleep(1000);
 				}
-			} catch (IOException e) {
+
+			} catch (IOException | InterruptedException e) {
+				System.out.println(getClass());
 				System.out.println(e.getMessage());
 			}
 		}

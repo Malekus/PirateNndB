@@ -30,32 +30,22 @@ public class Serveur {
 	}
 
 	public void lancement() {
-		Gestionnaire.initialisation();
+		//Gestionnaire.initialisation();
 		System.out.println("Serveur lancé");
 		while (allume) {
 			try {
 				this.setSocket(this.getServeur().accept());
 				System.out.println("Une personne s'est connecté");
-				BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
+				/*BufferedReader lecture = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
+				String requete[] = lecture.readLine().split("\\n");
 
-				/*
-				 * while(!ligne.isEmpty()) { requete.add(ligne); ligne = lecture.readLine(); }
-				 */
-
-				/*
-				 * System.out.println(requete.toString());
-				 * 
-				 * if(requete.get(0).split(" ")[0].equals("GET")) { pool.execute(new
-				 * MaitreEsclaveNavigateur(getSocket(), this, requete));
-				 * 
-				 * } else { String req[] = new String[requete.size()]; req =
-				 * requete.toArray(req); for (String e : requete) { System.out.println(e); }
-				 */
-				String requete[] = lecture.readLine().split(" ");
-				pool.execute(new MaitreEsclaveLocal(getSocket(), this, requete));
-				// }
+				for(String e : requete) {
+					System.out.println(e);
+				}*/
+				pool.execute(new MaitreEsclaveLocal(getSocket(), this));
 
 			} catch (IOException e) {
+				System.out.println(getClass());
 				System.out.println(e.getMessage());
 
 			}
