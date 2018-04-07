@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listeLogement>
+    <logements>
+        <disponibilite>true</disponibilite>
+        <hote>
+            <dateInscription>2018-04-07T23:37:00.409+02:00</dateInscription>
+            <description>ptotodz dz dazd</description>
+            <nbCommentaire>6</nbCommentaire>
+            <pseudo>Pseudo54</pseudo>
+        </hote>
+        <lieu>
+            <adresse>avenue Victor Hugo</adresse>
+            <pays>France</pays>
+            <ville>Lyon</ville>
+        </lieu>
+        <numero>1</numero>
+        <prix>750.0</prix>
+    </logements>
+    <logements>
+        <disponibilite>true</disponibilite>
+        <hote>
+            <dateInscription>2018-04-07T23:37:00.409+02:00</dateInscription>
+            <description>Je parle pour rien</description>
+            <nbCommentaire>6</nbCommentaire>
+            <pseudo>Hannae</pseudo>
+        </hote>
+        <lieu>
+            <adresse>8 rue toto</adresse>
+            <pays>France</pays>
+            <ville>Paris</ville>
+        </lieu>
+        <numero>3</numero>
+        <prix>546.0</prix>
+    </logements>
+    <logements>
+        <disponibilite>true</disponibilite>
+        <hote>
+            <dateInscription>2018-04-07T23:37:00.409+02:00</dateInscription>
+            <description>FiaseNA</description>
+            <nbCommentaire>6</nbCommentaire>
+            <pseudo>Nafise</pseudo>
+        </hote>
+        <lieu>
+            <adresse>avenue Victor Hugo</adresse>
+            <pays>France</pays>
+            <ville>Lyon</ville>
+        </lieu>
+        <numero>2</numero>
+        <prix>954.0</prix>
+    </logements>
+    <logements>
+        <disponibilite>true</disponibilite>
+        <hote>
+            <dateInscription>2018-04-07T23:37:00.409+02:00</dateInscription>
+            <description>Je parle pour rien</description>
+            <langues>francais</langues>
+            <langues>anglais</langues>
+            <nbCommentaire>6</nbCommentaire>
+            <pseudo>Kader</pseudo>
+        </hote>
+        <lieu>
+            <adresse>8 rue toto</adresse>
+            <pays>France</pays>
+            <ville>Paris</ville>
+        </lieu>
+        <numero>4</numero>
+        <prix>954.0</prix>
+    </logements>
+    <logements>
+        <disponibilite>false</disponibilite>
+        <hote>
+            <dateInscription>2018-04-07T23:37:00.409+02:00</dateInscription>
+            <description>Je parle pour rien</description>
+            <langues>francais</langues>
+            <langues>anglais</langues>
+            <nbCommentaire>6</nbCommentaire>
+            <pseudo>Kader</pseudo>
+        </hote>
+        <lieu>
+            <adresse></adresse>
+            <pays></pays>
+            <ville></ville>
+        </lieu>
+        <numero>5</numero>
+        <prix>954.0</prix>
+    </logements>
+</listeLogement>

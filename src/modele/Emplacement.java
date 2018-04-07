@@ -6,13 +6,11 @@ import java.lang.reflect.Method;
 public class Emplacement {
 	private String adresse;
 	private String ville;
-	private String region;
 	private String pays;
 
-	public Emplacement(String adresse, String ville, String region, String pays) {
+	public Emplacement(String adresse, String ville, String pays) {
 		this.adresse = adresse;
 		this.ville = ville;
-		this.region = region;
 		this.pays = pays;
 	}
 
@@ -35,14 +33,6 @@ public class Emplacement {
 		this.ville = ville;
 	}
 
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
 	public String getPays() {
 		return pays;
 	}
@@ -53,7 +43,7 @@ public class Emplacement {
 
 	@Override
 	public String toString() {
-		return "Emplacement [adresse=" + adresse + ", ville=" + ville + ", region=" + region + ", pays=" + pays + "]";
+		return "Emplacement a refaireee";
 	}
 
 	public Object getters(String attr) {

@@ -3,16 +3,19 @@ package modele;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Logement {
+	private int numero;
 	private Personne hote;
 	private ArrayList<Equipement> equipements;
 	private Emplacement lieu;
 	private ArrayList<Commentaire> commentaires;
-	private Disponibilite disponibilite;
+	private boolean disponibilite;
 	private float prix;
 
-	public Logement(Personne hote, Emplacement lieu, Disponibilite disponibilite, float prix) {
+	public Logement(int numero, Personne hote, Emplacement lieu, boolean disponibilite, float prix) {
+		this.numero = numero;
 		this.hote = hote;
 		this.equipements = new ArrayList<Equipement>();
 		this.lieu = lieu;
@@ -21,12 +24,30 @@ public class Logement {
 		this.prix = prix;
 	}
 
+	public Logement() {
+		this.numero = 0;
+		this.hote = null;
+		this.equipements = new ArrayList<Equipement>();
+		this.lieu = null;
+		this.commentaires = new ArrayList<Commentaire>();
+		this.disponibilite = true;
+		this.prix = 0;
+	}
+
 	public Personne getHote() {
 		return hote;
 	}
 
 	public void setHote(Personne hote) {
 		this.hote = hote;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public ArrayList<Equipement> getEquipements() {
@@ -53,11 +74,11 @@ public class Logement {
 		this.commentaires = commentaires;
 	}
 
-	public Disponibilite getDisponibilite() {
+	public boolean getDisponibilite() {
 		return disponibilite;
 	}
 
-	public void setDisponibilite(Disponibilite disponibilite) {
+	public void setDisponibilite(boolean disponibilite) {
 		this.disponibilite = disponibilite;
 	}
 
@@ -71,14 +92,38 @@ public class Logement {
 
 	@Override
 	public String toString() {
-		return "Logement [hote=" + hote + ", equipements=" + equipements + ", lieu=" + lieu + ", commentaires="
-				+ commentaires + ", disponibilite=" + disponibilite + ", prix=" + prix + "]";
+		String r = "<logement>\n";
+		r += "\t<numero>" + getNumero() + "</numero>\n";
+		r += "\t<personne>" + getNumero() + "</personne>\n";
+		if (getEquipements().isEmpty()) {
+			r += "\t<equipements>\n\t</equipements>\n";
+		} else {
+			r += "\t<equipements>\n";
+			for (Equipement e : getEquipements()) {
+				r += "\t\t<equipement>" + e.toString() + "</equipement>\n";
+			}
+			r += "</equipements>\n";
+		}
+		r += "\t<lieu>" + getLieu() + "</lieu>\n";
+		if (getCommentaires().isEmpty()) {
+			r += "\t<commentaires>\n\t</commentaires>\n";
+		} else {
+			r += "\t<commentaires>\n";
+			for (Commentaire c : getCommentaires()) {
+				r += "\t\t<commentaire>" + c.toString() + "</commentaire>\n";
+			}
+			r += "</commentaires>\n";
+		}
+		r += "\t<disponibilite>" + getDisponibilite() + "</disponibilite>\n";
+		r += "\t<prix>" + getPrix() + "</prix>\n</logement>";
+
+		return r;
 	}
 
-	
 	public Object getters(String attr) {
 		try {
-			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1), null);
+			Method method = this.getClass().getMethod("get" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
+					null);
 			Object objet = method.invoke(this, null);
 			return objet;
 		} catch (NoSuchMethodException e) {
@@ -91,12 +136,19 @@ public class Logement {
 		return new Object();
 	}
 
-	public void setters(String attr, Object param) {
+	public boolean setters(String attr, Object param) {
+		String functionName = "set" + attr.substring(0, 1).toUpperCase() + attr.substring(1);
 		Method method;
+		boolean define = true;
 		try {
-			method = this.getClass().getMethod("set" + attr.substring(0, 1).toUpperCase() + attr.substring(1),
-					param.getClass());
+			define = Arrays.asList(this.getClass().getMethods()).stream()
+					.anyMatch(m -> m.getName().equals(functionName));
+			if (!define)
+				return define;
+
+			method = this.getClass().getMethod(functionName, param.getClass());
 			Object objet = method.invoke(this, param);
+
 		} catch (NoSuchMethodException e) {
 			System.err.println(e.getMessage());
 		} catch (SecurityException e) {
@@ -104,6 +156,7 @@ public class Logement {
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			System.err.println(e.getMessage());
 		}
+		return define;
 	}
 
 }

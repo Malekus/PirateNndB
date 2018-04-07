@@ -78,19 +78,91 @@ public class Demande implements Runnable {
 					System.out.println("Valeur ?");
 					String valeur = sc.nextLine();
 					xmlRequete += "\t\t<Modifier>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
-					xmlRequete += "\t\t\t<Attribut>"+attribut+"</Attribut>\n";
-					xmlRequete += "\t\t\t<Valeur>"+valeur+"</Valeur>\n";
+					xmlRequete += "\t\t\t<Attribut>" + attribut + "</Attribut>\n";
+					xmlRequete += "\t\t\t<Valeur>" + valeur + "</Valeur>\n";
 					xmlRequete += "\t\t</Modifier>\n\t<Personne>\n</Requete>\n";
 					ecriture.println(xmlRequete);
-				}break;
-				
+				}
+					break;
+
 				case "5": {
 					System.out.println("Pseudo de la personne");
 					String pseudo = sc.nextLine();
 					xmlRequete += "\t\t<Supprimer>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
 					xmlRequete += "\t\t</Supprimer>\n\t<Personne>\n</Requete>\n";
 					ecriture.println(xmlRequete);
-				}break;
+				}
+					break;
+				default:
+					break;
+				}
+			}
+				break;
+			case "2": {
+				xmlRequete += "\t<Logement>\n";
+				System.out.println("Menu - Logement");
+				System.out.println("1 - Creer un logement");
+				System.out.println("2 - Afficher un logement");
+				System.out.println("3 - Afficher tous les logements");
+				System.out.println("4 - Modifier un logement");
+				System.out.println("5 - Supprimer un logement");
+				System.out.println("m - Retourner Menu");
+				requete = sc.nextLine();
+				switch (requete) {
+				case "1": {
+					System.out.println("Pseudo de la personne");
+					String pseudo = sc.nextLine();
+					xmlRequete += "\t\t<Creer>\n\t\t\t<Pseudo>" + pseudo + "</Pseudo>\n";
+					System.out.println("Lieu du logement");
+					String lieu = sc.nextLine();
+					xmlRequete += "\t\t\t<Lieu>" + lieu + "</Lieu>\n";
+					System.out.println("Disponible ? oui non ?");
+					String disponible = sc.nextLine();
+					boolean dispo = (disponible == "oui") ? true : false;
+					xmlRequete += "\t\t\t<Disponibilite>" + dispo + "</Disponibilite>\n";
+					System.out.println("Prix");
+					String prix = sc.nextLine();
+					xmlRequete += "\t\t\t<Prix>" + prix + "</Prix>\n";
+					xmlRequete += "\t\t</Creer>\n\t</Logement>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "2": {
+					System.out.println("Numéro du logement");
+					String numero = sc.nextLine();
+					xmlRequete += "\t\t<Afficher>\n\t\t\t<Numero>" + numero + "</Numero>\n";
+					xmlRequete += "\t\t</Afficher>\n\t</Logement>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "3": {
+					xmlRequete += "\t\t<Afficher>\n\t\t</Afficher>\n\t</Logement>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+				case "4": {
+					System.out.println("Numéro du logement");
+					String numero = sc.nextLine();
+					System.out.println("Attribut du logement");
+					String attribut = sc.nextLine();
+					System.out.println("Valeur ?");
+					String valeur = sc.nextLine();
+					xmlRequete += "\t\t<Modifier>\n\t\t\t<Numero>" + numero + "</Numero>\n";
+					xmlRequete += "\t\t\t<Attribut>" + attribut + "</Attribut>\n";
+					xmlRequete += "\t\t\t<Valeur>" + valeur + "</Valeur>\n";
+					xmlRequete += "\t\t</Modifier>\n\t<Logement>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
+
+				case "5": {
+					System.out.println("Numero du logement");
+					String numero = sc.nextLine();
+					xmlRequete += "\t\t<Supprimer>\n\t\t\t<Numero>" + numero + "</Numero>\n";
+					xmlRequete += "\t\t</Supprimer>\n\t<Logement>\n</Requete>\n";
+					ecriture.println(xmlRequete);
+				}
+					break;
 				default:
 					break;
 				}
@@ -110,7 +182,7 @@ public class Demande implements Runnable {
 			}
 
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}
