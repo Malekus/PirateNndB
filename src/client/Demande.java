@@ -27,7 +27,7 @@ public class Demande implements Runnable {
 		boolean stop = false;
 		while (!socket.isClosed() && !stop) {
 			xmlRequete = "<Requete>\n";
-			System.out.println("Menu");
+			System.out.println("Menu - PirateNndBClient");
 			System.out.println("1 - Personne");
 			System.out.println("2 - Logement");
 			System.out.println("3 - Location");
