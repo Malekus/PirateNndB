@@ -27,7 +27,7 @@ public class EsclaveLocation extends Esclave{
 			Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
 					.filter(p -> p.getPseudo().equals(XMLPirateNndB.getValue(getRequete()[3]))).findAny().orElse(null);
 			Logement logement = Gestionnaire.TousLesLogements.stream()
-					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))
+					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[4])))
 					.findAny().orElse(null);
 			if (personne != null && logement != null) {
 				if(logement.getDisponibilite()) {

@@ -31,7 +31,6 @@ public class Demande implements Runnable {
 			System.out.println("1 - Personne");
 			System.out.println("2 - Logement");
 			System.out.println("3 - Location");
-			System.out.println("4 - Commentaire");
 			System.out.println("Q - Quitter");
 			System.out.print(">> ");
 			requete = sc.nextLine();
@@ -242,6 +241,7 @@ public class Demande implements Runnable {
 				break;
 
 			default:
+				System.out.println("Aucune commande reconnue");
 				break;
 			}
 
@@ -250,12 +250,6 @@ public class Demande implements Runnable {
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}
-			/*
-			 * if (requete.equals("Q")) {
-			 * 
-			 * }
-			 */
-
 		}
 
 		try {

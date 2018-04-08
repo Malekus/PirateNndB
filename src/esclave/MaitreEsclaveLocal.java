@@ -63,6 +63,11 @@ public class MaitreEsclaveLocal implements Runnable {
 					new EsclaveLocation(commande, ecriture);
 				}
 					break;
+					
+				case "<Quitter>": {
+					System.out.println("La perosnne s'est déconnecté");
+				}
+					break;
 
 				default:
 					ecriture.println("Aucun commande associé");
