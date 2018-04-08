@@ -31,6 +31,7 @@ public class EsclaveLocation extends Esclave{
 					.findAny().orElse(null);
 			if (personne != null && logement != null) {
 				if(logement.getDisponibilite()) {
+					logement.setDisponibilite(false);
 					Location location = new Location(Gestionnaire.ToutesLesLocations.size() + 1, personne, logement);
 					Gestionnaire.ToutesLesLocations.add(location);
 					XMLPirateNndB.ecriture(new ListeLocation(), "location");
@@ -54,7 +55,7 @@ public class EsclaveLocation extends Esclave{
 				if (location != null) {
 					getOut().println(location);
 				} else {
-					getOut().println("Cette logement n'existe pas");
+					getOut().println("Cette location n'existe pas");
 				}
 			}
 
@@ -62,37 +63,37 @@ public class EsclaveLocation extends Esclave{
 			break;
 
 		case "<Modifier>": {
-			Logement logement = Gestionnaire.TousLesLogements.stream()
+			Location location = Gestionnaire.ToutesLesLocations.stream()
 					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))
 					.findAny().orElse(null);
-			if (logement != null) {
-				boolean methodeDefine = logement.setters(XMLPirateNndB.getValue(getRequete()[4]),
+			if (location != null) {
+				boolean methodeDefine = location.setters(XMLPirateNndB.getValue(getRequete()[4]),
 						XMLPirateNndB.getValue(getRequete()[5]));
 				if (!methodeDefine) {
 					getOut().println("L'attribut selectionné n'existe pas ");
 				} else {
-					XMLPirateNndB.ecriture(new ListeLogement(), "logement");
-					getOut().println("Vous avez modifié ce logement");
-					getOut().println(logement);
+					XMLPirateNndB.ecriture(new ListeLocation(), "location");
+					getOut().println("Vous avez modifié cette location");
+					getOut().println(location);
 				}
 
 			} else {
-				getOut().println("Ce logement n'existe pas");
+				getOut().println("Cette location n'existe pas");
 			}
 
 		}
 			break;
 		case "<Supprimer>": {
-			Logement logement = Gestionnaire.TousLesLogements.stream()
+			Location location = Gestionnaire.ToutesLesLocations.stream()
 					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))
 					.findAny().orElse(null);
-			if (logement != null) {
-				Gestionnaire.TousLesLogements
+			if (location != null) {
+				Gestionnaire.ToutesLesLocations
 						.removeIf(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])));
-				XMLPirateNndB.ecriture(new ListeLogement(), "logement");
-				getOut().println("Vous avez supprimé ce logement");
+				XMLPirateNndB.ecriture(new ListeLocation(), "location");
+				getOut().println("Vous avez supprimé cette location");
 			} else {
-				getOut().println("Ce logement n'existe pas");
+				getOut().println("Cette location n'existe pas");
 			}
 		}
 			break;

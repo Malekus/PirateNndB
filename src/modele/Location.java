@@ -39,7 +39,55 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [personne=" + personne + ", logement=" + logement + "]";
+		String r = "<location>\n";
+		r += "\t<numero>" + getNumero() + "</numero>\n";
+		r += "\t<personne>\n\t\t<pseudo>" + getPersonne().getPseudo() + "</pseudo>\n\t\t<description>"
+				+ getPersonne().getDescription() + "</description>\n\t\t<nbCommentaire>"
+				+ getPersonne().getNbCommentaire() + "</nbCommentaire>\n\t\t<dateInscription>"
+				+ getPersonne().getDateInscription() + "</dateInscription>";
+		if (getPersonne().getLangues().size() == 0) {
+			r += "\n\t\t<langues>\n\t\t</langues>\n\t</personne>\n";
+		} else {
+			r += "\n\t\t<langues>\n";
+			for (Langue l : getPersonne().getLangues()) {
+				r += "\t\t\t" + l.toString();
+			}
+			r += "\t\t</langues>\n\t</personne>\n";
+		}
+
+		r += "\t<logement>\n";
+		r += "\t\t<numero>" + getLogement().getNumero() + "</numero>\n";
+		r += "\t\t<hote>\n";
+		r += "\t\t\t<pseudo>" + getLogement().getHote().getPseudo() + "</pseudo>\n\t\t\t<description>"
+				+ getLogement().getHote().getDescription() + "</description>\n\t\t\t<nbCommentaire>"
+				+ getLogement().getHote().getNbCommentaire() + "</nbCommentaire>\n\t\t\t<dateInscription>"
+				+ getLogement().getHote().getDateInscription() + "</dateInscription>";
+		if (getPersonne().getLangues().size() == 0) {
+			r += "\n\t\t<langues>\n\t\t</langues>\n";
+		} else {
+			r += "\n\t\t\t<langues>\n";
+			for (Langue l : getPersonne().getLangues()) {
+				r += "\t\t\t\t" + l.toString();
+			}
+			r += "\t\t\t</langues>\n";
+		}
+		r += "\t\t</hote>\n";
+		r += "\t\t<equipements>\n";
+		r += "\t\t</equipements>\n";
+		r += "\t\t<lieu>\n";
+		r += "\t\t</lieu>\n";
+		r += "\t\t<commentaires>\n";
+		r += "\t\t</commentaires>\n";
+		r += "\t\t<disponibilite>" + getLogement().getDisponibilite() + "</disponibilite>\n";
+		r += "\t\t<prix>" + getLogement().getPrix() + "</prix>\n";
+		r += "\t</logement>";
+
+		return r + "\n</location>\n";
+	}
+
+	public static void main(String[] args) {
+		Gestionnaire.initialisation();
+		System.out.println(Gestionnaire.ToutesLesLocations.get(0));
 	}
 
 	public int getNumero() {

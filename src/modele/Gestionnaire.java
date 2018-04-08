@@ -28,11 +28,14 @@ public class Gestionnaire {
 		Gestionnaire.TousLesLogements.add(new Logement(1,Gestionnaire.ToutesLesPersonnes.get(3),
 				Gestionnaire.TousLesEmplacements.get(2), true, 750));
 		Gestionnaire.TousLesLogements.add(new Logement(3,Gestionnaire.ToutesLesPersonnes.get(2),
-				Gestionnaire.TousLesEmplacements.get(3), true, 546));
+				Gestionnaire.TousLesEmplacements.get(3), false, 546));
 		Gestionnaire.TousLesLogements.add(new Logement(2,Gestionnaire.ToutesLesPersonnes.get(1),
-				Gestionnaire.TousLesEmplacements.get(2), true, 954));
+				Gestionnaire.TousLesEmplacements.get(2), false, 954));
 		Gestionnaire.TousLesLogements.add(new Logement(4,Gestionnaire.ToutesLesPersonnes.get(0),
 				Gestionnaire.TousLesEmplacements.get(3), true, 954));
+		
+		Gestionnaire.ToutesLesLocations.add(new Location(0, Gestionnaire.ToutesLesPersonnes.get(0), Gestionnaire.TousLesLogements.get(1)));
+		Gestionnaire.ToutesLesLocations.add(new Location(1, Gestionnaire.ToutesLesPersonnes.get(1), Gestionnaire.TousLesLogements.get(2)));
 
 	}
 
