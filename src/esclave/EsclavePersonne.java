@@ -15,10 +15,6 @@ public class EsclavePersonne extends Esclave {
 	}
 
 	public void traintement() {
-		int i = 0;
-		for(String e : getRequete()) {
-			System.out.println(e+ " " + i++);
-		}
 		switch (getRequete()[2].replace("\t", "").replace("\n", "")) {
 		case "<Creer>": {
 			Personne personne = new Personne(XMLPirateNndB.getValue(getRequete()[3]),
@@ -31,7 +27,9 @@ public class EsclavePersonne extends Esclave {
 
 		case "<Afficher>": {
 			if (getRequete()[3].contains("</Afficher>")) {
-				getOut().println(Gestionnaire.ToutesLesPersonnes);
+				for(Personne p : Gestionnaire.ToutesLesPersonnes) {
+					getOut().println(p);
+				}
 			} else {
 				Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
 						.filter(p -> p.getPseudo().equals(XMLPirateNndB.getValue(getRequete()[3]))).findAny()

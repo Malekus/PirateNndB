@@ -17,11 +17,6 @@ public class EsclaveLocation extends Esclave{
 	}
 	
 	public void traintement() {
-		for(String s : getRequete()) {
-			System.out.println(s);
-		}
-		
-		
 		switch (getRequete()[2].replace("\t", "").replace("\n", "")) {
 		case "<Creer>": {
 			Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
@@ -47,7 +42,9 @@ public class EsclaveLocation extends Esclave{
 
 		case "<Afficher>": {
 			if (getRequete()[3].contains("</Afficher>")) {
-				getOut().println(Gestionnaire.ToutesLesLocations);
+				for(Location l : Gestionnaire.ToutesLesLocations) {
+					getOut().println(l);
+				}
 			} else {
 				Location location = Gestionnaire.ToutesLesLocations.stream()
 						.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))

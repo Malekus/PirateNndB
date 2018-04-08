@@ -35,7 +35,9 @@ public class EsclaveLogement extends Esclave {
 
 		case "<Afficher>": {
 			if (getRequete()[3].contains("</Afficher>")) {
-				getOut().println(Gestionnaire.TousLesLogements);
+				for (Logement l : Gestionnaire.TousLesLogements) {
+					getOut().println(l);
+				}
 			} else {
 				Logement logement = Gestionnaire.TousLesLogements.stream()
 						.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))
@@ -52,8 +54,8 @@ public class EsclaveLogement extends Esclave {
 
 		case "<Modifier>": {
 			Logement logement = Gestionnaire.TousLesLogements.stream()
-					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))
-					.findAny().orElse(null);
+					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3]))).findAny()
+					.orElse(null);
 			if (logement != null) {
 				boolean methodeDefine = logement.setters(XMLPirateNndB.getValue(getRequete()[4]),
 						XMLPirateNndB.getValue(getRequete()[5]));
@@ -73,8 +75,8 @@ public class EsclaveLogement extends Esclave {
 			break;
 		case "<Supprimer>": {
 			Logement logement = Gestionnaire.TousLesLogements.stream()
-					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])))
-					.findAny().orElse(null);
+					.filter(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3]))).findAny()
+					.orElse(null);
 			if (logement != null) {
 				Gestionnaire.TousLesLogements
 						.removeIf(l -> l.getNumero() == Integer.parseInt(XMLPirateNndB.getValue(getRequete()[3])));
