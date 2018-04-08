@@ -8,6 +8,7 @@ public class Gestionnaire {
 	public static ArrayList<Logement> TousLesLogements = new ArrayList<Logement>();
 	public static ArrayList<Emplacement> TousLesEmplacements = new ArrayList<Emplacement>();
 	public static ArrayList<Commentaire> TousLesCommentaires = new ArrayList<Commentaire>();
+	public static ArrayList<Location> ToutesLesLocations = new ArrayList<Location>();
 
 	public static void initialisation() {
 		ArrayList<Langue> lg = new ArrayList<Langue>();
