@@ -22,6 +22,7 @@ public class EsclavePersonne extends Esclave {
 			Gestionnaire.ToutesLesPersonnes.add(personne);
 			XMLPirateNndB.ecriture(new ListePersonne(), "personne");
 			getOut().println("Vous avez creer une personne");
+			System.out.println("- Creer Personne Succes");
 		}
 			break;
 
@@ -30,14 +31,17 @@ public class EsclavePersonne extends Esclave {
 				for(Personne p : Gestionnaire.ToutesLesPersonnes) {
 					getOut().println(p);
 				}
+				System.out.println("- Afficher Personne Succes");
 			} else {
 				Personne personne = Gestionnaire.ToutesLesPersonnes.stream()
 						.filter(p -> p.getPseudo().equals(XMLPirateNndB.getValue(getRequete()[3]))).findAny()
 						.orElse(null);
 				if (personne != null) {
 					getOut().println(personne);
+					System.out.println("- Afficher Personne Succes");
 				} else {
 					getOut().println("Cette personne n'existe pas");
+					System.out.println("- Afficher Personne Echec");
 				}
 			}
 
@@ -52,14 +56,17 @@ public class EsclavePersonne extends Esclave {
 						XMLPirateNndB.getValue(getRequete()[5]));
 				if (!methodeDefine) {
 					getOut().println("L'attribut selectionné n'existe pas ");
+					System.out.println("- Modifier Personne Echec");
 				} else {
 					XMLPirateNndB.ecriture(new ListePersonne(), "personne");
 					getOut().println("Vous avez modifié une personne");
 					getOut().println(personne);
+					System.out.println("- Modifier Personne Succes");
 				}
 
 			} else {
 				getOut().println("Cette personne n'existe pas");
+				System.out.println("- Modifier Personne Echec");
 			}
 
 		}
@@ -71,14 +78,17 @@ public class EsclavePersonne extends Esclave {
 				Gestionnaire.ToutesLesPersonnes.removeIf(p -> p.getPseudo().equals(XMLPirateNndB.getValue(getRequete()[3])));
 				XMLPirateNndB.ecriture(new ListePersonne(), "personne");
 				getOut().println("Vous avez supprimé une personne");
+				System.out.println("- Supprimer Personne Succes");
 			} else {
 				getOut().println("Cette personne n'existe pas");
+				System.out.println("- Supprimer Personne Echec");
 			}
 		}
 			break;
 
 		default: {
-			getOut().println("Aucun commande associée" + getClass());
+			getOut().println("Aucun commande associée");
+			System.out.println("- Commande Personne inconnue");
 		}
 			break;
 		}

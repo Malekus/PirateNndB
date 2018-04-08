@@ -52,20 +52,24 @@ public class MaitreEsclaveLocal implements Runnable {
 				switch (listeCommande.get(1).replaceAll("\n", "").replaceAll("\t", "")) {
 
 				case "<Personne>": {
+					System.out.println("Requete : Personne");
 					new EsclavePersonne(commande, ecriture);
 				}
 					break;
 				case "<Logement>": {
+					System.out.println("Requete : Logement");
 					new EsclaveLogement(commande, ecriture);
 				}
 					break;
 				case "<Location>": {
+					System.out.println("Requete : Location");
 					new EsclaveLocation(commande, ecriture);
 				}
 					break;
 					
 				case "<Quitter>": {
-					System.out.println("La perosnne s'est déconnecté");
+					System.out.println("Requete : Quitter");
+					System.out.println("La personne s'est déconnecté");
 				}
 					break;
 
