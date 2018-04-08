@@ -73,15 +73,35 @@ public class Location {
 		}
 		r += "\t\t</hote>\n";
 		r += "\t\t<equipements>\n";
+		for (Equipement e : getLogement().getEquipements()) {
+			r += "\t\t\t" + e.toString();
+		}
 		r += "\t\t</equipements>\n";
 		r += "\t\t<lieu>\n";
+		r += "\t\t\t<adresse>" + getLogement().getLieu().getAdresse() + "</adresse>\n";
+		r += "\t\t\t<ville>" + getLogement().getLieu().getVille() + "</ville>\n";
+		r += "\t\t\t<pays>" + getLogement().getLieu().getPays() + "</pays>\n";
 		r += "\t\t</lieu>\n";
 		r += "\t\t<commentaires>\n";
+		for (Commentaire c : getLogement().getCommentaires()) {
+			r += "\t\t\t<personne>\n";
+			r += "\t\t\t\t<pseudo>" + c.getPersonne().getPseudo() + "</pseudo>\n\t\t\t\t<description>"
+					+ c.getPersonne().getDescription() + "</description>\n\t\t\t\t<nbCommentaire>"
+					+ c.getPersonne().getNbCommentaire() + "</nbCommentaire>\n\t\t\t\t<dateInscription>"
+					+ c.getPersonne().getDateInscription() + "</dateInscription>\n";
+			r += "\t\t\t<langues>\n";
+			for (Langue l : c.getPersonne().getLangues()) {
+				r += "\t\t\t\t" + l.toString();
+			}
+			r += "\t\t\t</langues>\n";
+			r += "\t\t\t</personne>\n";
+			r += "\t\t\t<dateCommentaire>" + c.getDateCommentaire() + "<dateCommentaire>\n";
+			r += "\t\t\t<texte>" + c.getTexte() + "<texte>\n";
+		}
 		r += "\t\t</commentaires>\n";
 		r += "\t\t<disponibilite>" + getLogement().getDisponibilite() + "</disponibilite>\n";
 		r += "\t\t<prix>" + getLogement().getPrix() + "</prix>\n";
 		r += "\t</logement>";
-
 		return r + "\n</location>\n";
 	}
 

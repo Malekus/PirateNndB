@@ -24,6 +24,15 @@ public class Logement {
 		this.prix = prix;
 	}
 
+	public Logement(int numero, Personne hote, ArrayList<Equipement> equipements, Emplacement lieu, ArrayList<Commentaire> commentaires, boolean disponibilite, float prix) {
+		this.numero = numero;
+		this.hote = hote;
+		this.equipements = equipements;
+		this.lieu = lieu;
+		this.commentaires = commentaires;
+		this.disponibilite = disponibilite;
+		this.prix = prix;
+	}
 	public Logement() {
 		this.numero = 0;
 		this.hote = null;

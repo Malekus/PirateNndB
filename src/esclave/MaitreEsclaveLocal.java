@@ -59,16 +59,8 @@ public class MaitreEsclaveLocal implements Runnable {
 					new EsclaveLogement(commande, ecriture);
 				}
 					break;
-				case "<Commentaire>": {
-					new EsclaveCommentaire(commande, ecriture);
-				}
-					break;
 				case "<Location>": {
 					new EsclaveLocation(commande, ecriture);
-				}
-					break;
-				case "<Emplacement>": {
-					new EsclaveEmplacement(commande, ecriture);
 				}
 					break;
 
